@@ -1,4 +1,4 @@
-package com.example.BedManagement.Services;
+package com.example.BedManagement.Services.Impl;
 
 import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
