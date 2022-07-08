@@ -1,11 +1,13 @@
 package com.example.BedManagement.Controllers;
 
 import com.example.BedManagement.Entity.Student;
+import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Services.StudentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +20,9 @@ public class StudentRegistrationAndRequestController {
   String welcomePage(){
         return "index";
     }
-    ResponseEntity<Student>registerStudent(Student student){
-        Student newStudent = this.studentRegisterService.registerStudent(student);
-        return new ResponseEntity<>(newStudent, HttpStatus.CREATED);
+    @PostMapping("/v1")
+    ResponseEntity<String>registerStudent(StudentInfo student){
+        studentRegisterService.registerStudent(student);
+        return new ResponseEntity<>( HttpStatus.CREATED);
     }
 }

@@ -8,9 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NonNull
+
 public class Student {
     @Id
     private int studentId;
