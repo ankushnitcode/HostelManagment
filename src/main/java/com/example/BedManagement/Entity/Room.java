@@ -16,5 +16,5 @@ import java.util.List;
 public class Room {
     @Id
     private int roomId;
-    private List<Student> studentList = new ArrayList<>(4);
+    private List<Room> bedList = new ArrayList<>(4);
 }
