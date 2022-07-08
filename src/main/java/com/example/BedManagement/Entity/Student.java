@@ -6,6 +6,7 @@ import lombok.NonNull;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 
@@ -15,6 +16,8 @@ public class Student {
     private String studentName;
     private String studentGender;
     private  Boolean haveBed;
+    @ManyToOne
+    private Room room;
 
 
 }
