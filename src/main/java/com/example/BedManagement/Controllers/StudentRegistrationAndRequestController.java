@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentRegistrationAndRequestController {
     @Autowired
     StudentRegisterService studentRegisterService;
-    @RequestMapping("/")
+    @RequestMapping("/home")
   String welcomePage(){
         return "index";
     }
