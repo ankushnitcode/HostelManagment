@@ -1,7 +1,7 @@
 package com.example.BedManagement.Controllers;
 
 import com.example.BedManagement.Model.StudentInfo;
-import com.example.BedManagement.Services.Impl.StudentRegisterService;
+import com.example.BedManagement.Services.StudentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +19,8 @@ public class StudentRegistrationAndRequestController {
         return "index";
     }
     @PostMapping("/v1")
-    ResponseEntity<String>registerStudent(StudentInfo student){
-        studentRegisterService.registerStudent(student);
+    ResponseEntity<Integer>registerStudent(StudentInfo student){
+        StudentInfo studentInfo = this.studentRegisterService.registerStudent(student);
         return new ResponseEntity<>( HttpStatus.CREATED);
     }
 }
