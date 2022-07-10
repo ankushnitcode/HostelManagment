@@ -16,7 +16,7 @@ public class StudentRegistrationAndRequestController {
     StudentRegisterService studentRegisterService;
     @RequestMapping("/home")
   String homePage(){
-        return "index";
+        return "Welcome";
     }
     @PostMapping("/v1")
     ResponseEntity<Integer>registerStudent(StudentInfo student){
