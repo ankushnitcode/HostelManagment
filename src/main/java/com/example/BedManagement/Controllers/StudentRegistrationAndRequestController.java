@@ -15,7 +15,7 @@ public class StudentRegistrationAndRequestController {
     @Autowired
     StudentRegisterService studentRegisterService;
     @RequestMapping("/home")
-  String welcomePage(){
+  String homePage(){
         return "index";
     }
     @PostMapping("/v1")

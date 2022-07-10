@@ -11,9 +11,10 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
 
     @Override
     public StudentInfo registerStudent(StudentInfo student){
-        if(student.getHaveBed()==false)
-       StudentInfo studentInfo = this.studentRepository.save(student);
-
+        if(student.getHaveBed()==false) {
+            StudentInfo studentInfo = this.studentRepository.save(student);
+        }
+        return new StudentInfo();
 
     }
 
