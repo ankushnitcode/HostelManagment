@@ -2,52 +2,42 @@ package com.example.BedManagement.Controllers;
 
 import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
-import com.example.BedManagement.Model.UserNotFoundException;
+import com.example.BedManagement.Repository.StudentRepository;
+import com.example.BedManagement.Services.StudentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("HostelSystem")
+
 public class StudentDetailsController {
 
     @Autowired
-    private Student service;
+    private StudentRegisterService studentRegisterService;
+    @Autowired
+    private StudentRepository studentRepository;
 
     // retrieve all users - GET/users
     @GetMapping("/students")
-    public List<StudentInfo> retrieveAllUsers() {
+    public List<Student> retrieveAllStudent() {
 
-        return service.findAll();
+        return studentRegisterService.findingAllStudent();
     }
 
     // Retrieve user(Integer id) - GET/students/{id}
     @GetMapping("/students/{id}")
-    public StudentInfo retrieveUser(@PathVariable int id) {
+    public ResponseEntity<StudentInfo> retrieveStudent(@PathVariable int id) {
 
-        StudentInfo student = service.findOne(id);
 
-        if (student == null) {
-            throw new UserNotFoundException("Id-" + id);
-        }
+       Optional<Student> student = studentRepository.findById(id);
+       return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.CREATED);
 
-        return student;
-    }
 
-    @PostMapping("/students")
-    public ResponseEntity<Object> createUser(@RequestBody StudentInfo student) {
-        StudentInfo savedUser = service.save(student);
-
-        // CREATED
-        // /users/{id} savedUser.getId()
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).build();
     }
 
 }

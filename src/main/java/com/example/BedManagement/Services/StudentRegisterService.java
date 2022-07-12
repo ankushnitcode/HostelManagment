@@ -3,7 +3,15 @@ package com.example.BedManagement.Services;
 import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface StudentRegisterService {
 
-     StudentInfo registerStudent(StudentInfo student);
+
+     List<Student> findingAllStudent();
+     Student createNewStudent(StudentInfo studentInfo);
+     StudentInfo createStudentResponse(Optional<Student> student);
+
+
 }

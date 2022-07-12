@@ -1,31 +1,35 @@
 package com.example.BedManagement.Entity;
 
 import com.example.BedManagement.Model.StudentInfo;
+import com.sun.istack.NotNull;
 import lombok.*;
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 @Entity
+@Table(name = "student")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Component
+@ToString
 public class Student {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int studentId;
+    @Column(name="student_name")
     private String studentName;
     private String studentGender;
     private  Boolean haveBed;
     @ManyToOne
     private Room room;
 
+/*
     private static List<StudentInfo> students = new ArrayList<>();
     private static int usersCount = 3;
 
@@ -54,5 +58,5 @@ public class Student {
         }
         return null;
     }
-
+*/
 }

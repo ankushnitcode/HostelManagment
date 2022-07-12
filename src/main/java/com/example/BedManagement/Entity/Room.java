@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,8 @@ import java.util.List;
 public class Room {
     @Id
     private int roomId;
-    private List<Room> bedList = new ArrayList<>(4);
+    @OneToMany
+   private List<Student> studentList;
     @ManyToOne
     private Hostel hostel;
 }
