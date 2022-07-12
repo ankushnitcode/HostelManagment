@@ -1,8 +1,6 @@
 package com.example.BedManagement.Model;
 
 
-import com.example.BedManagement.Entity.Room;
-import com.example.BedManagement.Entity.Student;
 import lombok.*;
 
 @Getter
@@ -12,8 +10,8 @@ import lombok.*;
 @ToString
 public class StudentInfo {
     private Integer Id;
-    private String studentName;
-    private String studentGender;
+    private String name;
+    private String gender;
     private  Boolean haveBed;
 
 

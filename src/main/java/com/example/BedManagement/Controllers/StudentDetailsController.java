@@ -18,10 +18,6 @@ public class StudentDetailsController {
     @Autowired
     private Student service;
 
-//    public StudentDetailsController(Student service) {
-//        this.service = service;
-//    }
-
     // retrieve all users - GET/users
     @GetMapping("/students")
     public List<StudentInfo> retrieveAllUsers() {
