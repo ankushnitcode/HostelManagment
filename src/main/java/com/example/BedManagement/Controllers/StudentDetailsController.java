@@ -33,10 +33,13 @@ public class StudentDetailsController {
     @GetMapping("/students/{id}")
     public ResponseEntity<StudentInfo> retrieveStudent(@PathVariable int id) {
 
-
-       Optional<Student> student = studentRepository.findById(id);
-       return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.CREATED);
-
+     if(studentRepository.existsById(id)){
+         Optional<Student> student = studentRepository.findById(id);
+         return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.OK);
+     }
+     else{
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+     }
 
     }
 
