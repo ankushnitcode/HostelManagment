@@ -4,23 +4,19 @@ import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Model.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("HS")
+@RequestMapping("HostelSystem")
 public class StudentDetailsController {
 
     @Autowired
     private Student service;
-
-//    public StudentDetailsController(Student service) {
-//        this.service = service;
-//    }
 
     // retrieve all users - GET/users
     @GetMapping("/students")
@@ -40,6 +36,18 @@ public class StudentDetailsController {
         }
 
         return student;
+    }
+
+    @PostMapping("/students")
+    public ResponseEntity<Object> createUser(@RequestBody StudentInfo student) {
+        StudentInfo savedUser = service.save(student);
+
+        // CREATED
+        // /users/{id} savedUser.getId()
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
 }
