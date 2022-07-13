@@ -2,7 +2,8 @@ package com.example.BedManagement.Exception;
 
 import java.util.Date;
 
-import com.example.BedManagement.Model.UserNotFoundException;
+import com.example.BedManagement.Entity.Student;
+import com.example.BedManagement.Model.StudentNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -27,8 +28,8 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public final ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest request)
+    @ExceptionHandler(StudentNotFoundException.class)
+    public final ResponseEntity<Object> handleStudentNotFoundException(StudentNotFoundException ex, WebRequest request)
             throws Exception {
 
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),

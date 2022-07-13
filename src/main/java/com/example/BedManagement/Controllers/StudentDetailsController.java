@@ -2,6 +2,7 @@ package com.example.BedManagement.Controllers;
 
 import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
+import com.example.BedManagement.Model.StudentNotFoundException;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +30,20 @@ public class StudentDetailsController {
         return studentRegisterService.findingAllStudent();
     }
 
+
+
     // Retrieve student(Integer id) - GET/students/{id}
-//    @GetMapping("/students/{id}")
-//    public ResponseEntity<StudentInfo> retrieveStudent(@PathVariable int id) {
-//
-//     if(studentRepository.existsById(id)){
-//         Optional<Student> student = studentRepository.findById(id);
-//         return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.OK);
-//     }
-//     else{
-//         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//     }
-//
-//    }
+    @GetMapping("/students/{id}")
+    public ResponseEntity<StudentInfo> retrieveStudent(@PathVariable int id) {
+
+     if(studentRepository.existsById(id)){
+         Optional<Student> student = studentRepository.findById(id);
+         return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.OK);
+     }
+     else{
+         throw new StudentNotFoundException("Id-" + id);
+     }
+
+    }
 
 }
