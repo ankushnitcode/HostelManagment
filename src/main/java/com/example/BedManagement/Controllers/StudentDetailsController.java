@@ -22,25 +22,25 @@ public class StudentDetailsController {
     @Autowired
     private StudentRepository studentRepository;
 
-    // retrieve all users - GET/users
+    // retrieve all students - GET/students
     @GetMapping("/students")
     public List<Student> retrieveAllStudent() {
 
         return studentRegisterService.findingAllStudent();
     }
 
-    // Retrieve user(Integer id) - GET/students/{id}
-    @GetMapping("/students/{id}")
-    public ResponseEntity<StudentInfo> retrieveStudent(@PathVariable int id) {
-
-     if(studentRepository.existsById(id)){
-         Optional<Student> student = studentRepository.findById(id);
-         return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.OK);
-     }
-     else{
-         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-     }
-
-    }
+    // Retrieve student(Integer id) - GET/students/{id}
+//    @GetMapping("/students/{id}")
+//    public ResponseEntity<StudentInfo> retrieveStudent(@PathVariable int id) {
+//
+//     if(studentRepository.existsById(id)){
+//         Optional<Student> student = studentRepository.findById(id);
+//         return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.OK);
+//     }
+//     else{
+//         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//     }
+//
+//    }
 
 }
