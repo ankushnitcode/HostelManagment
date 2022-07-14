@@ -1,14 +1,17 @@
 package com.example.BedManagement.Services.Impl;
 
+import com.example.BedManagement.Entity.Room;
 import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Model.StudentNotFoundException;
+import com.example.BedManagement.Repository.RoomRepository;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +19,8 @@ import java.util.Optional;
 public class StudentRegisterServiceImpl implements StudentRegisterService {
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    RoomRepository roomRepository;
 
 
 
@@ -39,6 +44,18 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
         studentResponse.setGender(student1.getStudentGender());
         studentResponse.setHaveBed(student1.getHaveBed());
         return studentResponse;
+    }
+    public void assigningBedToStudent(int id){
+        Student assigningStudent = studentRepository.findById(id).get();
+        Room room = new Room();
+        List<Student>bedList= new ArrayList<>();
+        assigningStudent.setHaveBed(true);
+        assigningStudent.setRoom(room);
+        bedList.add(assigningStudent);
+        room.setStudentList(bedList);
+        studentRepository.save(assigningStudent);
+        roomRepository.save(room);
+
     }
 
 }

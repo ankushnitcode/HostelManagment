@@ -17,6 +17,6 @@ public class Room {
     private int roomId;
     @OneToMany
    private List<Student> studentList;
-    @ManyToOne
-    private Hostel hostel;
+   // @ManyToOne
+    //private Hostel hostel;
 }

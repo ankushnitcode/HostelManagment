@@ -19,6 +19,6 @@ public class Hostel {
     private int hostelNumber;
     private String hostelCategory;
     private String hostelName;
-    @OneToMany
-    private List<Room> roomList;
+   // @OneToMany
+   // private List<Room> roomList;
 }

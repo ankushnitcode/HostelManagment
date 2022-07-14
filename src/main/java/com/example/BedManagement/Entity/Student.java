@@ -18,16 +18,24 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int studentId;
-    @Column(name="student_name")
+    @NotNull
     private String studentName;
     private String studentGender;
     private  Boolean haveBed;
     @ManyToOne
     private Room room;
+
+
+
+
 
 /*
     private static List<StudentInfo> students = new ArrayList<>();

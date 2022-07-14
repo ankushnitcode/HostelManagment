@@ -7,10 +7,7 @@ import com.example.BedManagement.Services.StudentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -22,18 +19,29 @@ public class StudentRegistrationAndRequestController {
     StudentRepository studentRepository;
     @Autowired
     StudentRegisterService studentRegisterService;
-    @RequestMapping("/home")
-  String homePage(){
-        return "Welcome";
-    }
+
+  //  @RequestMapping("/home")
+ // String homePage(){
+      //  return "Welcome";
+  //  }
     @PostMapping("/students")
     public ResponseEntity<Object> createStudent(@RequestBody StudentInfo studentInfoBody) {
-        Student student = new Student();
-        student= studentRegisterService.createNewStudent(studentInfoBody);
+       Student student = new Student();
+       student = studentRegisterService.createNewStudent(studentInfoBody);
         Student savedUser = studentRepository.save(student);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getStudentId())
-                .toUri();
+       // URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getStudentId())
+               // .toUri();
 
-        return ResponseEntity.created(location).build();
+        return new ResponseEntity<>(savedUser,HttpStatus.CREATED);
+    }
+    @PostMapping("/request/{id}")
+    public ResponseEntity<Object>bedRequest(@PathVariable int id){
+        if(!studentRepository.existsById(id)){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        else{
+            studentRegisterService.assigningBedToStudent(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 }
