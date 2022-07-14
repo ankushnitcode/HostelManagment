@@ -26,24 +26,34 @@ public class StudentDetailsController {
     // retrieve all students - GET/students
     @GetMapping("/students")
     public List<Student> retrieveAllStudent() {
-
         return studentRegisterService.findingAllStudent();
     }
 
+    @DeleteMapping("/students")
+    public List<Student> deleteStudent(){
+        return studentRegisterService.findingAllStudent();
+    }
 
 
     // Retrieve student(Integer id) - GET/students/{id}
     @GetMapping("/students/{id}")
     public ResponseEntity<StudentInfo> retrieveStudent(@PathVariable int id) {
-
      if(studentRepository.existsById(id)){
          Optional<Student> student = studentRepository.findById(id);
-         return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.OK);
+         return new ResponseEntity<>(studentRegisterService.studentResponse(student), HttpStatus.OK);
      }
      else{
          throw new StudentNotFoundException("Id-" + id);
      }
-
     }
-
+    @DeleteMapping("/students/{id}")
+    public ResponseEntity<StudentInfo> deleteStudent(@PathVariable int id) {
+        if(studentRepository.existsById(id)){
+            Optional<Student> student = studentRepository.findById(id);
+            return new ResponseEntity<>(studentRegisterService.studentResponse(student), HttpStatus.OK);
+        }
+        else{
+            throw new StudentNotFoundException("Id-" + id);
+        }
+    }
 }

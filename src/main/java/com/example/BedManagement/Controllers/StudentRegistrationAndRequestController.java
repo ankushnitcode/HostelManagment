@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 
@@ -25,11 +26,9 @@ public class StudentRegistrationAndRequestController {
   String homePage(){
         return "Welcome";
     }
-
     @PostMapping("/students")
     @ResponseBody
-    public StudentInfo createStudent(@RequestBody StudentInfo studentInfoBody)
-    {
+    public StudentInfo createStudent(@Valid @RequestBody StudentInfo studentInfoBody) {
         Student student =
                 new Student();
         student = studentRegisterService.createNewStudent(studentInfoBody);
@@ -38,16 +37,4 @@ public class StudentRegistrationAndRequestController {
         ResponseEntity.created(location).build();
         return studentInfoBody;
     }
-               //}
-
-
-//    @PostMapping("/students")
-//    public ResponseEntity<Object> createStudent(@RequestBody StudentInfo studentInfoBody) {
-//        Student student = new Student();
-//        student= studentRegisterService.createNewStudent(studentInfoBody);
-//        Student savedUser = studentRepository.save(student);
-//        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getStudentId())
-//                .toUri();
-//        return ResponseEntity.created(location).build();
-//    }
 }
