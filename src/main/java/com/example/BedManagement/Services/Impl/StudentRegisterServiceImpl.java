@@ -5,6 +5,7 @@ import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Model.StudentNotFoundException;
 import com.example.BedManagement.Repository.RoomRepository;
+import com.example.BedManagement.Repository.StudentInfoRepository;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
     StudentRepository studentRepository;
     @Autowired
     RoomRepository roomRepository;
-
-
+@Autowired
+    StudentInfoRepository studentInfoRepository;
 
     @Override
     public List<Student> findingAllStudent() {
@@ -36,26 +37,70 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
         newStudent.setHaveBed(studentInfo.getHaveBed());
         return newStudent;
     }
-    public StudentInfo createStudentResponse(Optional<Student> student){
-        Student student1= new Student();
-        student1 = student.get();
-        StudentInfo studentResponse = new StudentInfo();
-        studentResponse.setName(student1.getStudentName());
-        studentResponse.setGender(student1.getStudentGender());
-        studentResponse.setHaveBed(student1.getHaveBed());
+    public StudentInfo createNewStudentInfo(Student student){
+        StudentInfo studentInfo = new StudentInfo();
+        studentInfo.setStudentId(student.getStudentId());
+        studentInfo.setName(student.getStudentName());
+        studentInfo.setHaveBed(student.getHaveBed());
+        studentInfo.setRoomId(student.getRoomId());
+        studentInfo.setGender(student.getStudentGender());
+        return studentInfo;
+    }
+    public Student createStudentResponse(Student student){
+        Student studentResponse = new Student();
+        studentResponse.setStudentId(student.getStudentId());
+        studentResponse.setStudentName(student.getStudentName());
+        studentResponse.setStudentGender(student.getStudentGender());
+        studentResponse.setHaveBed(student.getHaveBed());
+        studentResponse.setRoomId(student.getRoomId());
         return studentResponse;
     }
     public void assigningBedToStudent(int id){
         Student assigningStudent = studentRepository.findById(id).get();
-        Room room = new Room();
-        List<Student>bedList= new ArrayList<>();
-        assigningStudent.setHaveBed(true);
-        assigningStudent.setRoom(room);
-        bedList.add(assigningStudent);
-        room.setStudentList(bedList);
-        studentRepository.save(assigningStudent);
-        roomRepository.save(room);
+        List<Room>roomList= roomRepository.findAll();
+        System.out.print("no of rooms is "+ roomList.size());
+        if(roomList.size()>0){
+            for (Room room : roomList) {
+                if (room.getStudentList().size() < 4) {
+                    assigningStudent.setHaveBed(true);
+                    assigningStudent.setRoomId(room.getRoomId());
+                    List<StudentInfo> newList = room.getStudentList();
+                    StudentInfo assigningStudentInfo = createNewStudentInfo(assigningStudent);
+                    newList.add(assigningStudentInfo);
+                    room.setStudentList(newList);
+                    studentInfoRepository.save(assigningStudentInfo);
+                    studentRepository.save(assigningStudent);
+                    roomRepository.save(room);
+                    return;
+                }
+            }
+            Room newRoom = new Room(roomList.size()+1,new ArrayList<>());
+            assigningStudent.setHaveBed(true);
+            assigningStudent.setRoomId(newRoom.getRoomId());
+            List<StudentInfo>newList=   new ArrayList<>(4);
+            StudentInfo assigningStudentInfo = createNewStudentInfo(assigningStudent);
+            newList.add(assigningStudentInfo);
+            newRoom.setStudentList(newList);
+            studentInfoRepository.save(assigningStudentInfo);
+            studentRepository.save(assigningStudent);
+            roomRepository.save(newRoom);
+        }
+else{
+                Room newRoom = new Room(roomList.size()+1,new ArrayList<>());
+                assigningStudent.setHaveBed(true);
+                assigningStudent.setRoomId(newRoom.getRoomId());
+        List<StudentInfo>newList=   new ArrayList<>(4);
+        StudentInfo assigningStudentInfo = createNewStudentInfo(assigningStudent);
+        newList.add(assigningStudentInfo);
+        newRoom.setStudentList(newList);
+        studentInfoRepository.save(assigningStudentInfo);
+                studentRepository.save(assigningStudent);
+               roomRepository.save(newRoom);}
+            }}
 
-    }
 
-}
+
+
+
+
+

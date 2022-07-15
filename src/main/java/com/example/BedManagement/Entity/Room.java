@@ -1,5 +1,6 @@
 package com.example.BedManagement.Entity;
 
+import com.example.BedManagement.Model.StudentInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ public class Room {
     @Id
     private int roomId;
     @OneToMany
-   private List<Student> studentList;
+   private List<StudentInfo> studentList;
    // @ManyToOne
     //private Hostel hostel;
 }

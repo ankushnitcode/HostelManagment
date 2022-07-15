@@ -34,10 +34,10 @@ public class StudentDetailsController {
 
     // Retrieve student(Integer id) - GET/students/{id}
     @GetMapping("/students/{id}")
-    public ResponseEntity<StudentInfo> retrieveStudent(@PathVariable int id) {
+    public ResponseEntity<Student> retrieveStudent(@PathVariable int id) {
 
      if(studentRepository.existsById(id)){
-         Optional<Student> student = studentRepository.findById(id);
+         Student student = studentRepository.findById(id).get();
          return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.OK);
      }
      else{

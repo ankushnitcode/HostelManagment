@@ -13,6 +13,6 @@ public interface StudentRegisterService {
 
      List<Student> findingAllStudent();
      Student createNewStudent(StudentInfo studentInfo);
-     StudentInfo createStudentResponse(Optional<Student> student);
+     Student createStudentResponse(Student student);
      void assigningBedToStudent(int id);
 }

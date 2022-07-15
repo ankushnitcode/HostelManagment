@@ -1,4 +1,4 @@
-package com.example.BedManagement.Model;
+/*package com.example.BedManagement.Model;
 
 import com.example.BedManagement.Entity.Hostel;
 import lombok.Getter;
@@ -28,3 +28,4 @@ public class HostelManager {
         this.girlsHostelList = girlsHostelList;
     }
 }
+*/
