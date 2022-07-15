@@ -4,44 +4,37 @@ import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 
 @RestController
+@RequestMapping("/HostelSystem")
 public class StudentRegistrationAndRequestController {
     @Autowired
     StudentRepository studentRepository;
     @Autowired
     StudentRegisterService studentRegisterService;
-
-  //  @RequestMapping("/home")
- // String homePage(){
-      //  return "Welcome";
-  //  }
-    @PostMapping("/students")
-    public ResponseEntity<Object> createStudent(@RequestBody StudentInfo studentInfoBody) {
-       Student student = new Student();
-       student = studentRegisterService.createNewStudent(studentInfoBody);
-        Student savedUser = studentRepository.save(student);
-       // URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getStudentId())
-               // .toUri();
-
-        return new ResponseEntity<>(savedUser,HttpStatus.CREATED);
+    @RequestMapping("/home")
+  String homePage(){
+        return "Welcome";
     }
-    @PostMapping("/request/{id}")
-    public ResponseEntity<Object>bedRequest(@PathVariable int id){
-        if(!studentRepository.existsById(id)){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        else{
-            studentRegisterService.assigningBedToStudent(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
+    @PostMapping("/students")
+    @ResponseBody
+    public StudentInfo createStudent(@Valid @RequestBody StudentInfo studentInfoBody) {
+        Student student =
+                new Student();
+        student = studentRegisterService.createNewStudent(studentInfoBody);
+        Student savedStudent = studentRepository.save(student);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedStudent.getStudentId()).toUri();
+        ResponseEntity.created(location).build();
+        return studentInfoBody;
     }
 }
