@@ -68,7 +68,7 @@ public class StudentRegisterAndRequestControllerTest{
         String content = ow.writeValueAsString(student);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
-                .post("/students")
+                .post("/HostelSystem/students")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                                 .content(content);

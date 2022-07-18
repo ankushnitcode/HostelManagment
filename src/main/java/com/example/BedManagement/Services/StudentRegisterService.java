@@ -1,5 +1,6 @@
 package com.example.BedManagement.Services;
 
+import com.example.BedManagement.Entity.Room;
 import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Model.StudentNotFoundException;
@@ -14,5 +15,6 @@ public interface StudentRegisterService {
      List<Student> findingAllStudent();
      Student createNewStudent(StudentInfo studentInfo);
      Student createStudentResponse(Student student);
-     void assigningBedToStudent(int id);
+     Room assigningBedToStudent(int id,List<Room>roomList);
+     void assigningRoomToHostel(int id);
 }

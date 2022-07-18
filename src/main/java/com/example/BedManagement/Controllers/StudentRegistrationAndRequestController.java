@@ -43,7 +43,7 @@ public class StudentRegistrationAndRequestController {
         if(!studentRepository.existsById(id)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);}
             else{
-                studentRegisterService.assigningBedToStudent(id);
+                studentRegisterService.assigningRoomToHostel(id);
               return new   ResponseEntity<>(HttpStatus.OK);
             }
 
