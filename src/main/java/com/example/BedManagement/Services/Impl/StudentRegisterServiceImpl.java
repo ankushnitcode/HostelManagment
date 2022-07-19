@@ -3,13 +3,11 @@ package com.example.BedManagement.Services.Impl;
 import com.example.BedManagement.Entity.Room;
 import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
-import com.example.BedManagement.Model.StudentNotFoundException;
 import com.example.BedManagement.Repository.RoomRepository;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,5 +55,13 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
         roomRepository.save(room);
 
     }
+
+//    public Student deleteStudent(int studentId){
+//
+//        if(studentRepository.existsById(studentId)){
+//            studentRepository.
+//        }
+//
+//    }
 
 }

@@ -1,39 +1,25 @@
 package com.example.BedManagement.ControllerTest;
 
 import com.example.BedManagement.Controllers.StudentRegistrationAndRequestController;
-import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import org.apache.logging.log4j.message.ObjectMessage;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.platform.engine.TestExecutionResult;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import javax.transaction.Status;
-import java.util.Optional;
-import java.util.logging.Logger;
-
-
-import static org.assertj.core.api.BDDAssumptions.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -54,11 +40,9 @@ public class StudentRegisterAndRequestControllerTest{
    public void setUp(){
        MockitoAnnotations.initMocks(this);
        mockMvc = MockMvcBuilders.standaloneSetup(studentRegistrationAndRequestController).build();
-
-
    }
     @Test
-    public void studentRegisterAndGivingResponseTest() throws Exception{
+    public void studentRegisterResponseTest() throws Exception{
 
       StudentInfo student = StudentInfo.builder().name("ankush")
                       .gender("male").haveBed(false).build();
@@ -75,4 +59,16 @@ public class StudentRegisterAndRequestControllerTest{
        mockMvc.perform(mockRequest).andExpect(status().isCreated());
 
     }
+//    @Test
+//    public void bedRequest() throws Exception{
+//        when(studentRegistrationAndRequestController.bedRequest(1))
+//                .thenReturn(HttpStatus.OK);
+//
+//        RequestBuilder Request = MockMvcRequestBuilders.get("/HostelSystem/request/{id}",1)
+//                .accept(MediaType.APPLICATION_JSON);
+//        MvcResult mvcResult = mockMvc.perform(Request)
+//                .andExpect(status().isOk())
+//                //.andExpect((ResultMatcher) content().json("{studentId:1,studentName:tom,studentGender:Male,haveBed:false,room:null}"))
+//                .andReturn();
+//    }
 }
