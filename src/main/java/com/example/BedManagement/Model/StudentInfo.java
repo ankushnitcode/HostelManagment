@@ -3,8 +3,10 @@ package com.example.BedManagement.Model;
 
 import lombok.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Size;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Getter
 @Setter
@@ -12,10 +14,13 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @ToString
 @Builder
+@Entity
 public class StudentInfo {
-    @Size(min = 3,message = "Name should be atleast 3 letters")
+    @Id
+    private int StudentId;
     private String name;
     private String gender;
     private  Boolean haveBed;
+    private int roomId;
 
 }

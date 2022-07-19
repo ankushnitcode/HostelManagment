@@ -30,8 +30,7 @@ public class Student {
     private String studentName;
     private String studentGender;
     private  Boolean haveBed;
-    @ManyToOne
-    private Room room;
+    private int roomId;
 
 
 
