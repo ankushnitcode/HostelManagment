@@ -1,16 +1,14 @@
 package com.example.BedManagement.Exception;
 
+import lombok.Getter;
+
 import java.util.Date;
 
+@Getter
 public class ExceptionResponse {
 
-    // timeStamp
     private Date timeStamp;
-
-    // message
     private String message;
-
-    // details
     private String details;
 
     public ExceptionResponse(Date timeStamp, String message, String details) {
@@ -20,16 +18,18 @@ public class ExceptionResponse {
         this.details = details;
     }
 
-    public Date getTimeStamp() {
-        return timeStamp;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public String getDeatils() {
-        return details;
-    }
+//    public Date getTimeStamp() {
+//
+//        return timeStamp;
+//    }
+//
+//    public String getMessage() {
+//        return message;
+//    }
+//
+//    public String getDeatils() {
+//
+//        return details;
+//    }
 
 }

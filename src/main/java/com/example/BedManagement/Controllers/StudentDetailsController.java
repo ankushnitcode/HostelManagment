@@ -48,11 +48,11 @@ public class StudentDetailsController {
     }
     @DeleteMapping("/students/{id}")
     public ResponseEntity<StudentInfo> deleteStudent(@PathVariable int id) {
-        if(studentRepository.existsById(id)){
+        if (studentRepository.existsById(id)) {
             Optional<Student> student = studentRepository.findById(id);
-            return new ResponseEntity<>(studentRegisterService.studentResponse(student), HttpStatus.OK);
-        }
-        else{
+            studentRepository.delete(student);
+            return new ResponseEntity<>(studentRegisterService.studentResponse(student), HttpStatus.ACCEPTED);
+        } else {
             throw new StudentNotFoundException("Id-" + id);
         }
     }

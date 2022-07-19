@@ -2,6 +2,7 @@ package com.example.BedManagement.Controllers;
 
 import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.StudentInfo;
+
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
 
@@ -37,4 +38,15 @@ public class StudentRegistrationAndRequestController {
         ResponseEntity.created(location).build();
         return studentInfoBody;
     }
+
+//        @DeleteMapping("/students/{id}")
+//    public ResponseEntity<StudentInfo> deleteStudent(@PathVariable int id) {
+//        if (studentRepository.existsById(id)) {
+//            Optional<Student> student = studentRepository.findById(id);
+//            studentRepository.delete(student);
+//            return new ResponseEntity<>(studentRegisterService.studentResponse(student), HttpStatus.ACCEPTED);
+//        } else {
+//            throw new StudentNotFoundException("Id-" + id);
+//        }
+//    }
 }
