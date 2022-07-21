@@ -1,7 +1,7 @@
 package com.example.BedManagement.Controllers;
 
 import com.example.BedManagement.Entity.Student;
-import com.example.BedManagement.Model.StudentInfo;
+//import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
 
@@ -29,11 +29,10 @@ public class StudentRegistrationAndRequestController {
     }
     @PostMapping("/students")
     @ResponseBody
-    public ResponseEntity<Object> createStudent(@Valid @RequestBody StudentInfo studentInfoBody) {
-        Student student =
-                new Student();
-        student = studentRegisterService.createNewStudent(studentInfoBody);
-        Student savedStudent = studentRepository.save(student);
+    public ResponseEntity<Object> createStudent(@Valid @RequestBody Student student) {
+        Student newStudent;
+        newStudent = studentRegisterService.createNewStudent(student);
+        Student savedStudent = studentRepository.save(newStudent);
        // URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedStudent.getStudentId()).toUri();
        // ResponseEntity.created(location).build();
         return new ResponseEntity<>(savedStudent,HttpStatus.CREATED);

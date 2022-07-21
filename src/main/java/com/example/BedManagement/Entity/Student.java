@@ -1,16 +1,10 @@
 package com.example.BedManagement.Entity;
 
-import com.example.BedManagement.Model.StudentInfo;
+//import com.example.BedManagement.Model.StudentInfo;
 import com.sun.istack.NotNull;
 import lombok.*;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 
 
 @Entity
@@ -29,13 +23,17 @@ public class Student {
     @NotNull
     private String studentName;
     private String studentGender;
-    private  Boolean haveBed;
-    private int roomId;
+    private Boolean haveBed;
+    @ManyToOne
+    private BoysRoom boysRoom;
+    @ManyToOne
+    private GirlsRoom girlsRoom;
 
-
-
-
-
+    public Student(String studentName, String studentGender, Boolean haveBed) {
+        this.studentName = studentName;
+        this.studentGender = studentGender;
+        this.haveBed = haveBed;
+    }
 /*
     private static List<StudentInfo> students = new ArrayList<>();
     private static int usersCount = 3;

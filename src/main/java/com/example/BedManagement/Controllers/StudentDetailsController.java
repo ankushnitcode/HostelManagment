@@ -1,8 +1,11 @@
 package com.example.BedManagement.Controllers;
 
+import com.example.BedManagement.Entity.Hostel;
+import com.example.BedManagement.Entity.BoysRoom;
 import com.example.BedManagement.Entity.Student;
-import com.example.BedManagement.Model.StudentInfo;
+//import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Model.StudentNotFoundException;
+import com.example.BedManagement.Repository.HostelRepository;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("HostelSystem")
@@ -22,6 +25,8 @@ public class StudentDetailsController {
     private StudentRegisterService studentRegisterService;
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private HostelRepository hostelRepository;
 
     // retrieve all students - GET/students
     @GetMapping("/students")
@@ -45,5 +50,22 @@ public class StudentDetailsController {
      }
 
     }
+    @GetMapping("/{hostelNo}")
+    public ResponseEntity<List<Student>> retrieveStudentsByHostel(@PathVariable int hostelNo){
+        if(!hostelRepository.existsById(hostelNo)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+            Hostel hostel = hostelRepository.findById(hostelNo).get();
+            List<BoysRoom> boysRoomList = new ArrayList<>();
+            boysRoomList = hostel.getBoysRoomList();
+            List<Student> studentList= new ArrayList<>();
+            for(BoysRoom boysRoom : boysRoomList){
+                boysRoom.getStudentList().forEach(student -> studentList.add(studentRepository.findById(student.getStudentId()).get()));
 
-}
+            }
+            return new ResponseEntity<>(studentList,HttpStatus.OK);
+
+        }
+    }
+
+

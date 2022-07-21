@@ -1,20 +1,20 @@
 package com.example.BedManagement.Services;
 
-import com.example.BedManagement.Entity.Room;
+import com.example.BedManagement.Entity.BoysRoom;
+import com.example.BedManagement.Entity.GirlsRoom;
 import com.example.BedManagement.Entity.Student;
-import com.example.BedManagement.Model.StudentInfo;
-import com.example.BedManagement.Model.StudentNotFoundException;
-import org.springframework.web.bind.annotation.PathVariable;
+//import com.example.BedManagement.Model.StudentInfo;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface StudentRegisterService {
 
 
      List<Student> findingAllStudent();
-     Student createNewStudent(StudentInfo studentInfo);
+    Student createNewStudent(Student student);
      Student createStudentResponse(Student student);
-     Room assigningBedToStudent(int id,List<Room>roomList);
+     List<BoysRoom> assigningBedToStudent(int id, List<BoysRoom> boysRoomList);
+
+    List<GirlsRoom> assigningBedToGirlsStudent(int id, List<GirlsRoom> girlsRoomList);
      void assigningRoomToHostel(int id);
 }
