@@ -1,14 +1,19 @@
 package com.example.BedManagement.Services.Impl;
 
-import com.example.BedManagement.Entity.BoysRoom;
 import com.example.BedManagement.Entity.GirlsRoom;
 import com.example.BedManagement.Entity.Hostel;
+import com.example.BedManagement.Entity.BoysRoom;
 import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.HostelManager;
-import com.example.BedManagement.Repository.BoysRoomRepository;
+//import com.example.BedManagement.Model.RoomInfo;
+//import com.example.BedManagement.Model.StudentInfo;
+import com.example.BedManagement.Repository.GirlsRoomRepository;
 import com.example.BedManagement.Repository.HostelRepository;
+import com.example.BedManagement.Repository.BoysRoomRepository;
+//import com.example.BedManagement.Repository.StudentInfoRepository;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +23,16 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-
+@Getter
 public class StudentRegisterServiceImpl implements StudentRegisterService {
-
+    @Autowired
+    Student student;
     @Autowired
     StudentRepository studentRepository;
     @Autowired
     BoysRoomRepository boysRoomRepository;
-
-
+@Autowired
+ GirlsRoomRepository girlsRoomRepository;
    // StudentInfoRepository studentInfoRepository;
 @Autowired
      HostelManager hostelManager;
@@ -104,6 +110,7 @@ else{
         Student assigningStudent = studentRepository.findById(id).get();
         List<GirlsRoom> returningGirlsRoomList = new ArrayList<>();
         if(roomList.size()>0){
+            System.out.println("@@@@@@@@@@@" +roomList);
             for (GirlsRoom girlsRoom : roomList) {
                 if (girlsRoom.getStudentList().size() < 4) {
                     assigningStudent.setHaveBed(true);
@@ -113,7 +120,7 @@ else{
                     newList.add(assigningStudent);
                     girlsRoom.setStudentList(newList);
                     returningGirlsRoomList = roomList;
-
+                //   girlsRoomRepository.save(girlsRoom);
                     return returningGirlsRoomList;
 
                 }
@@ -167,6 +174,7 @@ else{
                         for (Hostel hostel : hostelList) {
                             if (hostel.getBoysRoomList().size() < 20) {
                                 List<BoysRoom> boysRoomList = hostel.getBoysRoomList();
+                                System.out.println("***********" +boysRoomList);
                               boysRoomList =   assigningBedToStudent(id, boysRoomList);
 
                                hostel.setBoysRoomList(boysRoomList);
@@ -213,6 +221,7 @@ else{
                             if (hostel.getGirlsRoomList().size() < 20){
 
                             List<GirlsRoom> girlsRoomList = hostel.getGirlsRoomList();
+                                System.out.println("***********" +girlsRoomList);
                        girlsRoomList =      assigningBedToGirlsStudent(id, girlsRoomList);
 
                           hostel.setGirlsRoomList(girlsRoomList);

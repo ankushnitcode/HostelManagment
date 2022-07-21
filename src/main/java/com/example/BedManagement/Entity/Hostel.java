@@ -12,10 +12,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@Data
 public class Hostel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +24,13 @@ public class Hostel {
 
    @OneToMany(cascade = CascadeType.ALL)
    @LazyCollection(LazyCollectionOption.FALSE)
-  //@JoinColumn(name = "roomId",referencedColumnName = "hostelNumber")
-    private List<BoysRoom> boysRoomList;
+   private List<BoysRoom> boysRoomList;
+
+
     @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
    private List<GirlsRoom> girlsRoomList;
-
+    //@JoinColumn(name = "roomId",referencedColumnName = "hostelNumber")
     public Hostel(int hostelNumber) {
         this.hostelNumber = hostelNumber;
     }
