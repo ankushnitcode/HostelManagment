@@ -1,5 +1,6 @@
 package com.example.BedManagement.Controllers;
 
+import com.example.BedManagement.Entity.GirlsRoom;
 import com.example.BedManagement.Entity.Hostel;
 import com.example.BedManagement.Entity.BoysRoom;
 import com.example.BedManagement.Entity.Student;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("HostelSystem")
@@ -56,6 +58,7 @@ public class StudentDetailsController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
             Hostel hostel = hostelRepository.findById(hostelNo).get();
+        if (Objects.equals(hostel.getHostelCategory(), "Male")){
             List<BoysRoom> boysRoomList = new ArrayList<>();
             boysRoomList = hostel.getBoysRoomList();
             List<Student> studentList= new ArrayList<>();
@@ -66,6 +69,16 @@ public class StudentDetailsController {
             return new ResponseEntity<>(studentList,HttpStatus.OK);
 
         }
-    }
+        else{
+            List<GirlsRoom> girlsRoomList = new ArrayList<>();
+            girlsRoomList = hostel.getGirlsRoomList();
+            List<Student> studentList= new ArrayList<>();
+            for(GirlsRoom girlsRoom : girlsRoomList){
+                girlsRoom.getStudentList().forEach(student -> studentList.add(studentRepository.findById(student.getStudentId()).get()));
+
+            }
+            return new ResponseEntity<>(studentList,HttpStatus.OK);
+        }
+    }}
 
 

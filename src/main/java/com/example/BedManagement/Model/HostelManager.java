@@ -4,10 +4,11 @@ import com.example.BedManagement.Entity.Hostel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class HostelManager {
     List<Hostel>boysHostelList = new ArrayList<>(2);
     List<Hostel>girlsHostelList = new ArrayList<>(2);
