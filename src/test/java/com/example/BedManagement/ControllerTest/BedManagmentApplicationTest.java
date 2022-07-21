@@ -1,7 +1,6 @@
 package com.example.BedManagement.ControllerTest;
 
 import com.example.BedManagement.Entity.Student;
-import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.Impl.StudentRegisterServiceImpl;
 import org.junit.Test;
@@ -21,8 +20,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class BedManagmentApplicationTest{
 
-    private StudentInfo studentInfo;
-
+    private Student student;
     @Autowired
     private StudentRegisterServiceImpl service;
 
@@ -32,8 +30,8 @@ public class BedManagmentApplicationTest{
     @Test
     public void findAllStudentTest(){
         when(repository.findAll()).thenReturn(Stream.of
-                        (new Student(1,"Test1","Male",null, null),
-                new Student(2,"Test2","Female",null,null))
+                        (new Student("Test1","Male",null),
+                new Student("Test2","Female",null))
                 .collect(Collectors.toList()));
         assertEquals(2,service.getStudent().size());
     }
@@ -50,8 +48,8 @@ public class BedManagmentApplicationTest{
         newStudent.setStudentName("Test1");
         newStudent.setStudentGender("Male");
         newStudent.setHaveBed(null);
-        newStudent.setRoom(null);
-        assertEquals(new Student(1,"Test1","Male",null,null),newStudent);
+       // newStudent.setRoom(null);
+        assertEquals(new Student("Test1","Male",null,null,null,null),newStudent);
     }
 
     @Test
