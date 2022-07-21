@@ -51,14 +51,9 @@ public class BedManagmentApplicationTest{
         newStudent.setStudentGender("Male");
         newStudent.setHaveBed(null);
         newStudent.setRoom(null);
+        repository.save(newStudent);
         assertEquals(new Student(1,"Test1","Male",null,null),newStudent);
     }
-
-    @Test
-    public void assigningBedToStudentTest(){
-
-    }
-
 //    @Test
 //    public void retriveAll(){//checking data present in database
 //        List<Student> list = studentRepository.findAll();

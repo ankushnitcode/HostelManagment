@@ -51,7 +51,7 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
         assigningStudent.setHaveBed(true);
         assigningStudent.setRoom(room);
         bedList.add(assigningStudent);
-        room.setStudentList(bedList);
+        //room.setStudentList(bedList);
         studentRepository.save(assigningStudent);
         roomRepository.save(room);
 
