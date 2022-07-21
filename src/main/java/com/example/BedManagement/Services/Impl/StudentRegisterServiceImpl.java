@@ -12,6 +12,7 @@ import com.example.BedManagement.Repository.BoysRoomRepository;
 //import com.example.BedManagement.Repository.StudentInfoRepository;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@Getter
 public class StudentRegisterServiceImpl implements StudentRegisterService {
+    @Autowired
+    Student student;
     @Autowired
     StudentRepository studentRepository;
     @Autowired
