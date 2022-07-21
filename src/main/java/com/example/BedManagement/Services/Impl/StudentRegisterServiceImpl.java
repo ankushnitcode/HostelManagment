@@ -24,7 +24,7 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
 
     @Override
     public List<Student> findingAllStudent() {
-        List<Student>studentInfoList = studentRepository.findAll();
+        List<Student> studentInfoList = studentRepository.findAll();
         return studentInfoList;
     }
     public Student createNewStudent(StudentInfo studentInfo){
@@ -34,6 +34,7 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
         newStudent.setHaveBed(studentInfo.getHaveBed());
         return newStudent;
     }
+
     public StudentInfo createStudentResponse(Optional<Student> student){
         Student student1= new Student();
         student1 = student.get();
@@ -46,7 +47,7 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
     public void assigningBedToStudent(int id){
         Student assigningStudent = studentRepository.findById(id).get();
         Room room = new Room();
-        List<Student>bedList= new ArrayList<>();
+        List<Student> bedList = new ArrayList<>();
         assigningStudent.setHaveBed(true);
         assigningStudent.setRoom(room);
         bedList.add(assigningStudent);
@@ -54,6 +55,12 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
         studentRepository.save(assigningStudent);
         roomRepository.save(room);
 
+    }
+
+    public List<Student> getStudent() {
+        List<Student> students = studentRepository.findAll();
+        //System.out.println("Getting data from DB: " + students);// for testing purpose
+        return students;
     }
 
 //    public Student deleteStudent(int studentId){

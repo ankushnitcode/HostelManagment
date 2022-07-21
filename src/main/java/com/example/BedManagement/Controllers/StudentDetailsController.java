@@ -45,7 +45,7 @@ public class StudentDetailsController {
      else{
          throw new StudentNotFoundException("Id-" + id);
      }
-    }
+       }
 
     @DeleteMapping("/students/{id}")
     public Student deleteStudent(@PathVariable("id") int id) {
@@ -61,9 +61,9 @@ public class StudentDetailsController {
         return student.get();
     }
 
-    @PutMapping("/students")
+    @PutMapping("/students/{id}")
     public Student updateStudent(@RequestBody Student studentObj){
         studentRepository.save(studentObj);
         return studentObj;
     }
-    }
+     }
