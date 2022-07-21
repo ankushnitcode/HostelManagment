@@ -15,7 +15,6 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
