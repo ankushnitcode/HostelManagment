@@ -1,74 +1,252 @@
 package com.example.BedManagement.Services.Impl;
 
-import com.example.BedManagement.Entity.Room;
+import com.example.BedManagement.Entity.GirlsRoom;
+import com.example.BedManagement.Entity.Hostel;
+import com.example.BedManagement.Entity.BoysRoom;
 import com.example.BedManagement.Entity.Student;
-import com.example.BedManagement.Model.StudentInfo;
-import com.example.BedManagement.Repository.RoomRepository;
+import com.example.BedManagement.Model.HostelManager;
+//import com.example.BedManagement.Model.RoomInfo;
+//import com.example.BedManagement.Model.StudentInfo;
+import com.example.BedManagement.Repository.HostelRepository;
+import com.example.BedManagement.Repository.BoysRoomRepository;
+//import com.example.BedManagement.Repository.StudentInfoRepository;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @Service
 public class StudentRegisterServiceImpl implements StudentRegisterService {
     @Autowired
     StudentRepository studentRepository;
     @Autowired
-    RoomRepository roomRepository;
+    BoysRoomRepository boysRoomRepository;
 
 
+   // StudentInfoRepository studentInfoRepository;
+@Autowired
+     HostelManager hostelManager;
+@Autowired
+HostelRepository hostelRepository;
 
     @Override
     public List<Student> findingAllStudent() {
-        List<Student> studentInfoList = studentRepository.findAll();
+        List<Student>studentInfoList = studentRepository.findAll();
         return studentInfoList;
     }
-    public Student createNewStudent(StudentInfo studentInfo){
+    public Student createNewStudent(Student student){
         Student newStudent = new Student();
-        newStudent.setStudentName(studentInfo.getName());
-        newStudent.setStudentGender(studentInfo.getGender());
-        newStudent.setHaveBed(studentInfo.getHaveBed());
+        newStudent.setStudentName(student.getStudentName());
+        newStudent.setStudentGender(student.getStudentGender());
+        newStudent.setHaveBed(student.getHaveBed());
         return newStudent;
-    }
-
-    public StudentInfo createStudentResponse(Optional<Student> student){
-        Student student1= new Student();
-        student1 = student.get();
-        StudentInfo studentResponse = new StudentInfo();
-        studentResponse.setName(student1.getStudentName());
-        studentResponse.setGender(student1.getStudentGender());
-        studentResponse.setHaveBed(student1.getHaveBed());
+    }/*
+    public StudentInfo createNewStudentInfo(Student student){
+        StudentInfo studentInfo = new StudentInfo();
+        studentInfo.setStudentId(student.getStudentId());
+        studentInfo.setName(student.getStudentName());
+        studentInfo.setHaveBed(student.getHaveBed());
+        //studentInfo.setRoomId(student.getRoomId());
+        studentInfo.setGender(student.getStudentGender());
+        return studentInfo;
+    }*/
+    public Student createStudentResponse(Student student){
+        Student studentResponse = new Student();
+        studentResponse.setStudentId(student.getStudentId());
+        studentResponse.setStudentName(student.getStudentName());
+        studentResponse.setStudentGender(student.getStudentGender());
+        studentResponse.setHaveBed(student.getHaveBed());
+       // studentResponse.setRoomId(student.getRoomId());
         return studentResponse;
     }
-    public void assigningBedToStudent(int id){
+    public List<BoysRoom> assigningBedToStudent(int id, List<BoysRoom> roomList){
         Student assigningStudent = studentRepository.findById(id).get();
-        Room room = new Room();
-        List<Student> bedList = new ArrayList<>();
-        assigningStudent.setHaveBed(true);
-        assigningStudent.setRoom(room);
-        bedList.add(assigningStudent);
-        room.setStudentList(bedList);
-        studentRepository.save(assigningStudent);
-        roomRepository.save(room);
+        List<BoysRoom> returningBoysRoomList = new ArrayList<>();
+        if(roomList.size()>0){
+            for (BoysRoom boysRoom : roomList) {
+                if (boysRoom.getStudentList().size() < 4) {
+                    assigningStudent.setHaveBed(true);
+                    List<Student> newList = boysRoom.getStudentList();
+                    newList.add(assigningStudent);
+                    boysRoom.setStudentList(newList);
+                   return roomList;
+
+                }
+            }
+            BoysRoom room = new BoysRoom();
+            assigningStudent.setHaveBed(true);
+            List<Student>newList=   new ArrayList<>(4);
+            newList.add(assigningStudent);
+            room.setStudentList(newList);
+
+            roomList.add(room);
+            return roomList;
+        }
+else{
+                BoysRoom newBoysRoom = new BoysRoom();
+                assigningStudent.setHaveBed(true);
+
+        List<Student>newList=   new ArrayList<>(4);
+
+        newList.add(assigningStudent);
+        newBoysRoom.setStudentList(newList);
+      roomList.add(newBoysRoom);
+      returningBoysRoomList = roomList;
 
     }
+         return returningBoysRoomList;
+            }
+    public List<GirlsRoom> assigningBedToGirlsStudent(int id, List<GirlsRoom> roomList){
+        Student assigningStudent = studentRepository.findById(id).get();
+        List<GirlsRoom> returningGirlsRoomList = new ArrayList<>();
+        if(roomList.size()>0){
+            for (GirlsRoom girlsRoom : roomList) {
+                if (girlsRoom.getStudentList().size() < 4) {
+                    assigningStudent.setHaveBed(true);
 
-    public List<Student> getStudent() {
-        List<Student> students = studentRepository.findAll();
-        //System.out.println("Getting data from DB: " + students);// for testing purpose
-        return students;
+                    List<Student> newList = girlsRoom.getStudentList();
+
+                    newList.add(assigningStudent);
+                    girlsRoom.setStudentList(newList);
+                    returningGirlsRoomList = roomList;
+
+                    return returningGirlsRoomList;
+
+                }
+            }
+            GirlsRoom room = new GirlsRoom();
+            assigningStudent.setHaveBed(true);
+            List<Student>newList=   new ArrayList<>(4);
+
+            newList.add(assigningStudent);
+
+            room.setStudentList(newList);
+
+
+            roomList.add(room);
+            return roomList;
+        }
+        else{
+            GirlsRoom newGirlsRoom = new GirlsRoom();
+            assigningStudent.setHaveBed(true);
+
+            List<Student>newList=   new ArrayList<>(4);
+
+            newList.add(assigningStudent);
+            newGirlsRoom.setStudentList(newList);
+            roomList.add(newGirlsRoom);
+            returningGirlsRoomList = roomList;
+
+        }
+        return returningGirlsRoomList;
     }
+            @Transactional
+            public void assigningRoomToHostel(int id) {
+                Student student = studentRepository.findById(id).get();
+                if (Objects.equals(student.getStudentGender(), "Male")) {
+                    List<Hostel> hostelList = hostelManager.getBoysHostelList();
+                    if (hostelList.size() == 0) {
+                        Hostel newHostel = new Hostel();
+                        newHostel.setHostelCategory(student.getStudentGender());
+                        List<BoysRoom> boysRoomList = new ArrayList<>(20);
+                      boysRoomList =   assigningBedToStudent(id, boysRoomList);
 
-//    public Student deleteStudent(int studentId){
-//
-//        if(studentRepository.existsById(studentId)){
-//            studentRepository.
-//        }
-//
-//    }
+                       newHostel.setBoysRoomList(boysRoomList);
 
+                        List<Hostel> newHostelList = new ArrayList<>();
+                        newHostelList.add(newHostel);
+                        hostelManager.setBoysHostelList(newHostelList);
+                        hostelRepository.save(newHostel);
+                        return;
+
+                    } else {
+                        for (Hostel hostel : hostelList) {
+                            if (hostel.getBoysRoomList().size() < 20) {
+                                List<BoysRoom> boysRoomList = hostel.getBoysRoomList();
+                              boysRoomList =   assigningBedToStudent(id, boysRoomList);
+
+                               hostel.setBoysRoomList(boysRoomList);
+
+
+                             hostelRepository.save(hostel);
+                             return;
+                            }
+                        }
+                        Hostel newHostel = new Hostel();
+                        newHostel.setHostelCategory(student.getStudentGender());
+                        List<BoysRoom> boysRoomList = new ArrayList<>(20);
+                    boysRoomList =    assigningBedToStudent(id, boysRoomList);
+
+                      newHostel.setBoysRoomList(boysRoomList);
+
+                        List<Hostel> newHostelList = new ArrayList<>();
+                        newHostelList.add(newHostel);
+                       hostelRepository.save(newHostel);
+                       return;
+                    }
+
+                }
+
+
+                if (Objects.equals(student.getStudentGender(), "Female")){
+                    List<Hostel> hostelList = hostelManager.getGirlsHostelList();
+                    if (hostelList.size() == 0) {
+                        Hostel hostel = new Hostel();
+                        hostel.setHostelCategory(student.getStudentGender());
+                        List<GirlsRoom> girlsRoomList = new ArrayList<>(20);
+                     girlsRoomList =    assigningBedToGirlsStudent(id, girlsRoomList);
+
+                      hostel.setGirlsRoomList(girlsRoomList);
+
+                        List<Hostel> newHostelList = new ArrayList<>();
+                        newHostelList.add(hostel);
+                        hostelManager.setGirlsHostelList(newHostelList);
+                       hostelRepository.save(hostel);
+                       return;
+                    } else {
+                        for (Hostel hostel : hostelList) {
+
+                            if (hostel.getGirlsRoomList().size() < 20){
+
+                            List<GirlsRoom> girlsRoomList = hostel.getGirlsRoomList();
+                       girlsRoomList =      assigningBedToGirlsStudent(id, girlsRoomList);
+
+                          hostel.setGirlsRoomList(girlsRoomList);
+
+                          hostelRepository.save(hostel);
+                          return;}
+                        }
+                        Hostel hostel = new Hostel();
+                        hostel.setHostelCategory(student.getStudentGender());
+                        List<GirlsRoom> girlsRoomList = new ArrayList<>(20);
+                    girlsRoomList =     assigningBedToGirlsStudent(id, girlsRoomList);
+
+                      hostel.setGirlsRoomList(girlsRoomList);
+
+                        List<Hostel> newHostelList = new ArrayList<>();
+                        newHostelList.add(hostel);
+                       hostelRepository.save(hostel);
+
+                    }
+                }
+            }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

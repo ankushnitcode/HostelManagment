@@ -1,10 +1,10 @@
 package com.example.BedManagement.Entity;
 
+//import com.example.BedManagement.Model.StudentInfo;
 import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
-
 
 
 @Entity
@@ -23,9 +23,17 @@ public class Student {
     @NotNull
     private String studentName;
     private String studentGender;
-    private  Boolean haveBed;
+    private Boolean haveBed;
     @ManyToOne
-    private Room room;
+    private BoysRoom boysRoom;
+    @ManyToOne
+    private GirlsRoom girlsRoom;
+
+    public Student(String studentName, String studentGender, Boolean haveBed) {
+        this.studentName = studentName;
+        this.studentGender = studentGender;
+        this.haveBed = haveBed;
+    }
 /*
     private static List<StudentInfo> students = new ArrayList<>();
     private static int usersCount = 3;

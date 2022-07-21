@@ -1,10 +1,9 @@
 package com.example.BedManagement.Entity;
 
-//import com.example.BedManagement.Model.RoomInfo;
+//import com.example.BedManagement.Model.StudentInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -15,23 +14,23 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Hostel {
+public class BoysRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int hostelNumber;
-    private String hostelCategory;
-
-
-   @OneToMany(cascade = CascadeType.ALL)
-   @LazyCollection(LazyCollectionOption.FALSE)
-  //@JoinColumn(name = "roomId",referencedColumnName = "hostelNumber")
-    private List<BoysRoom> boysRoomList;
+    private int roomId;
     @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-   private List<GirlsRoom> girlsRoomList;
 
-    public Hostel(int hostelNumber) {
-        this.hostelNumber = hostelNumber;
+  //  @JoinColumn(name = "studentId",referencedColumnName = "roomId")
+   private List<Student> studentList;
+    @ManyToOne
+    private Hostel hostel;
+
+
+
+
     }
-}
+
+
+
+

@@ -1,12 +1,10 @@
-package com.example.BedManagement.Model;
+/*package com.example.BedManagement.Model;
 
 
+import com.example.BedManagement.Entity.Room;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -21,6 +19,7 @@ public class StudentInfo {
     private String name;
     private String gender;
     private  Boolean haveBed;
-    private int roomId;
+    @ManyToOne
+    private Room room;
 
-}
+}*/

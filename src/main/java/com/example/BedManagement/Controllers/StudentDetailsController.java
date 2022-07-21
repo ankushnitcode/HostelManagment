@@ -1,29 +1,32 @@
 package com.example.BedManagement.Controllers;
 
+import com.example.BedManagement.Entity.Hostel;
+import com.example.BedManagement.Entity.BoysRoom;
 import com.example.BedManagement.Entity.Student;
+//import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Model.StudentNotFoundException;
+import com.example.BedManagement.Repository.HostelRepository;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@Getter
-@Setter
 @RequestMapping("HostelSystem")
+
 public class StudentDetailsController {
 
     @Autowired
     private StudentRegisterService studentRegisterService;
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private HostelRepository hostelRepository;
 
     // retrieve all students - GET/students
     @GetMapping("/students")
@@ -40,30 +43,29 @@ public class StudentDetailsController {
 
      if(studentRepository.existsById(id)){
          Student student = studentRepository.findById(id).get();
-         return new ResponseEntity<>(student, HttpStatus.OK);
+         return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.OK);
      }
      else{
          throw new StudentNotFoundException("Id-" + id);
      }
-       }
 
-    @DeleteMapping("/students/{id}")
-    public Student deleteStudent(@PathVariable("id") int id) {
-       Optional<Student> student = studentRepository.findById(id);
-        if(student.isPresent()){
-            studentRepository.delete(student.get());
+    }
+    @GetMapping("/{hostelNo}")
+    public ResponseEntity<List<Student>> retrieveStudentsByHostel(@PathVariable int hostelNo){
+        if(!hostelRepository.existsById(hostelNo)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        else
-        {
-            throw new StudentNotFoundException("Id-" + id);
-        }
+            Hostel hostel = hostelRepository.findById(hostelNo).get();
+            List<BoysRoom> boysRoomList = new ArrayList<>();
+            boysRoomList = hostel.getBoysRoomList();
+            List<Student> studentList= new ArrayList<>();
+            for(BoysRoom boysRoom : boysRoomList){
+                boysRoom.getStudentList().forEach(student -> studentList.add(studentRepository.findById(student.getStudentId()).get()));
 
-        return student.get();
+            }
+            return new ResponseEntity<>(studentList,HttpStatus.OK);
+
+        }
     }
 
-    @PutMapping("/students/{id}")
-    public Student updateStudent(@RequestBody Student studentObj){
-        studentRepository.save(studentObj);
-        return studentObj;
-    }
-     }
+
