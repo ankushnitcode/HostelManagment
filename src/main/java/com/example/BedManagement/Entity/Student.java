@@ -1,15 +1,9 @@
 package com.example.BedManagement.Entity;
 
-import com.example.BedManagement.Model.StudentInfo;
 import com.sun.istack.NotNull;
 import lombok.*;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 
@@ -30,12 +24,8 @@ public class Student {
     private String studentName;
     private String studentGender;
     private  Boolean haveBed;
-    private int roomId;
-
-
-
-
-
+    @ManyToOne
+    private Room room;
 /*
     private static List<StudentInfo> students = new ArrayList<>();
     private static int usersCount = 3;
