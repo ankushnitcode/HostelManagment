@@ -1,19 +1,15 @@
 package com.example.BedManagement.Services.Impl;
 
+import com.example.BedManagement.Entity.BoysRoom;
 import com.example.BedManagement.Entity.GirlsRoom;
 import com.example.BedManagement.Entity.Hostel;
-import com.example.BedManagement.Entity.BoysRoom;
 import com.example.BedManagement.Entity.Student;
 import com.example.BedManagement.Model.HostelManager;
-//import com.example.BedManagement.Model.RoomInfo;
-//import com.example.BedManagement.Model.StudentInfo;
+import com.example.BedManagement.Repository.BoysRoomRepository;
 import com.example.BedManagement.Repository.GirlsRoomRepository;
 import com.example.BedManagement.Repository.HostelRepository;
-import com.example.BedManagement.Repository.BoysRoomRepository;
-//import com.example.BedManagement.Repository.StudentInfoRepository;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@Getter
 public class StudentRegisterServiceImpl implements StudentRegisterService {
-    @Autowired
-    Student student;
     @Autowired
     StudentRepository studentRepository;
     @Autowired
@@ -41,7 +34,7 @@ HostelRepository hostelRepository;
 
     @Override
     public List<Student> findingAllStudent() {
-        List<Student>studentInfoList = studentRepository.findAll();
+        List<Student> studentInfoList = studentRepository.findAll();
         return studentInfoList;
     }
     public Student createNewStudent(Student student){
