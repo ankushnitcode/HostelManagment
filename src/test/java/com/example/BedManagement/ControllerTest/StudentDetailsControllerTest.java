@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -22,19 +23,19 @@ public class StudentDetailsControllerTest {
     @Autowired
     StudentRepository studentRepository;
 
-    @Autowired
+    @MockBean
     Student student;
 
     @Test
    // @Order(1)
     public void retrivingStudentFromDB(){//also can create
-//        Student student = new Student();
-//        student.setStudentId(22);
-//        student.setStudentGender("Male");
-//        student.setHaveBed(true);
-//        student.setStudentName("tom");
-//        studentRepository.save(student);
-        assertNotNull(studentRepository.findById(22).get());
+        Student student = new Student();
+        student.setStudentId(22);
+        student.setStudentGender("Male");
+        student.setHaveBed(true);
+        student.setStudentName("tom");
+        studentRepository.save(student);
+        assertNotNull(studentRepository.findById(1).get());
     }
 
     @Test
@@ -67,8 +68,8 @@ public class StudentDetailsControllerTest {
     @Test
   //  @Order(5)
     public void deleteStudent(){
-        studentRepository.deleteById(29);
-        assertThat(studentRepository.existsById(29)).isFalse();
+        studentRepository.deleteById(1);
+        assertThat(studentRepository.existsById(1)).isFalse();
     }
 
 }
