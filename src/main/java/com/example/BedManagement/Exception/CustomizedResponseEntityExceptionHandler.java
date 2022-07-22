@@ -50,4 +50,15 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(HostelNotFoundException.class)
+    public final ResponseEntity<Object> handleHostelNotFoundException(HostelNotFoundException ex, WebRequest request)
+            throws Exception {
+
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+                request.getDescription(false));
+
+        return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+
+    }
+
 }

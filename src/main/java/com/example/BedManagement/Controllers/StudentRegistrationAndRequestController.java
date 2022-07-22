@@ -2,6 +2,7 @@ package com.example.BedManagement.Controllers;
 
 import com.example.BedManagement.Entity.Student;
 //import com.example.BedManagement.Model.StudentInfo;
+import com.example.BedManagement.Exception.HostelNotFoundException;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
 
@@ -38,7 +39,7 @@ public class StudentRegistrationAndRequestController {
         return new ResponseEntity<>(savedStudent,HttpStatus.CREATED);
     }
     @PostMapping("/request/{id}")
-    public ResponseEntity<Object> studentBedRequest(@PathVariable int id ){
+    public ResponseEntity<Object> studentBedRequest(@PathVariable int id ) throws HostelNotFoundException {
         if(!studentRepository.existsById(id)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);}
             else{

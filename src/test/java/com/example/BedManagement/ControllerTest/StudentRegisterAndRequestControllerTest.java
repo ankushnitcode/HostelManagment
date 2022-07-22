@@ -3,6 +3,7 @@ package com.example.BedManagement.ControllerTest;
 import com.example.BedManagement.Controllers.StudentRegistrationAndRequestController;
 import com.example.BedManagement.Entity.Student;
 //import com.example.BedManagement.Model.StudentInfo;
+import com.example.BedManagement.Exception.HostelNotFoundException;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -79,7 +80,7 @@ public class StudentRegisterAndRequestControllerTest{
 
     }
     @Test
-    public void studentBedRequestTest() throws Exception{
+    public void studentBedRequestTest() throws Exception, HostelNotFoundException {
        when(studentRegistrationAndRequestController.studentBedRequest(1)).thenReturn(ResponseEntity.accepted().body(HttpStatus.CREATED));
        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
                .post("/HostelSystem/request/{id}");
