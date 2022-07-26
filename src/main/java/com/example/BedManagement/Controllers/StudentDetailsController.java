@@ -6,6 +6,8 @@ import com.example.BedManagement.Entity.BoysRoom;
 import com.example.BedManagement.Entity.Student;
 //import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.Model.StudentNotFoundException;
+import com.example.BedManagement.Repository.BoysRoomRepository;
+import com.example.BedManagement.Repository.GirlsRoomRepository;
 import com.example.BedManagement.Repository.HostelRepository;
 import com.example.BedManagement.Repository.StudentRepository;
 import com.example.BedManagement.Services.StudentRegisterService;
@@ -24,6 +26,10 @@ import java.util.Objects;
 public class StudentDetailsController {
 
     @Autowired
+    BoysRoomRepository boysRoomRepository;
+    @Autowired
+    GirlsRoomRepository girlsRoomRepository;
+    @Autowired
     private StudentRegisterService studentRegisterService;
     @Autowired
     private StudentRepository studentRepository;
@@ -38,47 +44,61 @@ public class StudentDetailsController {
     }
 
 
-
     // Retrieve student(Integer id) - GET/students/{id}
     @GetMapping("/students/{id}")
     public ResponseEntity<Student> retrieveStudent(@PathVariable int id) {
 
-     if(studentRepository.existsById(id)){
-         Student student = studentRepository.findById(id).get();
-         return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.OK);
-     }
-     else{
-         throw new StudentNotFoundException("Id-" + id);
-     }
+        if (studentRepository.existsById(id)) {
+            Student student = studentRepository.findById(id).get();
+            return new ResponseEntity<>(studentRegisterService.createStudentResponse(student), HttpStatus.OK);
+        } else {
+            throw new StudentNotFoundException("Id-" + id);
+        }
 
     }
+
     @GetMapping("/{hostelNo}")
-    public ResponseEntity<List<Student>> retrieveStudentsByHostel(@PathVariable int hostelNo){
-        if(!hostelRepository.existsById(hostelNo)) {
+    public ResponseEntity<List<Student>> retrieveStudentsByHostel(@PathVariable int hostelNo) {
+        if (!hostelRepository.existsById(hostelNo)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-            Hostel hostel = hostelRepository.findById(hostelNo).get();
-        if (Objects.equals(hostel.getHostelCategory(), "Male")){
+        Hostel hostel = hostelRepository.findById(hostelNo).get();
+        if (Objects.equals(hostel.getHostelCategory(), "Male")) {
             List<BoysRoom> boysRoomList = new ArrayList<>();
             boysRoomList = hostel.getBoysRoomList();
-            List<Student> studentList= new ArrayList<>();
-            for(BoysRoom boysRoom : boysRoomList){
-                boysRoom.getStudentList().forEach(student -> studentList.add(studentRepository.findById(student.getStudentId()).get()));
-
+            List<Student> studentList = new ArrayList<>();
+            for (BoysRoom boysRoom : boysRoomList) {
+                boysRoom.getStudentList().forEach(student ->
+                        studentList.add(studentRepository.findById(student.getStudentId()).get()));
             }
-            return new ResponseEntity<>(studentList,HttpStatus.OK);
+            return new ResponseEntity<>(studentList, HttpStatus.OK);
 
-        }
-        else{
+        } else {
             List<GirlsRoom> girlsRoomList = new ArrayList<>();
             girlsRoomList = hostel.getGirlsRoomList();
-            List<Student> studentList= new ArrayList<>();
-            for(GirlsRoom girlsRoom : girlsRoomList){
-                girlsRoom.getStudentList().forEach(student -> studentList.add(studentRepository.findById(student.getStudentId()).get()));
+            List<Student> studentList = new ArrayList<>();
+            for (GirlsRoom girlsRoom : girlsRoomList) {
+                girlsRoom.getStudentList().forEach(student ->
+                        studentList.add(studentRepository.findById(student.getStudentId()).get()));
 
             }
-            return new ResponseEntity<>(studentList,HttpStatus.OK);
+            return new ResponseEntity<>(studentList, HttpStatus.OK);
         }
-    }}
+    }
+
+    @GetMapping("/{hostelNo}/{roomId}")
+    public ResponseEntity<List<Student>> retrieveStudentByRoom
+            (@PathVariable(name = "hostelNo") int hostelNo, @PathVariable(name = "roomId") int roomId) {
+        List<Student> studentList = new ArrayList<>();
+        Hostel hostel = hostelRepository.findById(hostelNo).get();
+        if (Objects.equals(hostel.getHostelCategory(), "Male")) {
+            studentList = boysRoomRepository.findById(roomId).get().getStudentList();
+        } else {
+            studentList = girlsRoomRepository.findById(roomId).get().getStudentList();
+        }
+        return new ResponseEntity<>(studentList, HttpStatus.OK);
+    }
+
+}
 
 

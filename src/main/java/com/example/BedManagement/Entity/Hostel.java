@@ -1,6 +1,6 @@
 package com.example.BedManagement.Entity;
 
-//import com.example.BedManagement.Model.RoomInfo;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +30,7 @@ public class Hostel {
     @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
    private List<GirlsRoom> girlsRoomList;
-    //@JoinColumn(name = "roomId",referencedColumnName = "hostelNumber")
+
     public Hostel(int hostelNumber) {
         this.hostelNumber = hostelNumber;
     }

@@ -34,14 +34,17 @@ public class StudentRegistrationAndRequestController {
         Student newStudent;
         newStudent = studentRegisterService.createNewStudent(student);
         Student savedStudent = studentRepository.save(newStudent);
-       // URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedStudent.getStudentId()).toUri();
-       // ResponseEntity.created(location).build();
         return new ResponseEntity<>(savedStudent,HttpStatus.CREATED);
     }
+
+
     @PostMapping("/request/{id}")
     public ResponseEntity<Object> studentBedRequest(@PathVariable int id ) throws HostelNotFoundException {
         if(!studentRepository.existsById(id)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);}
+        else if(studentRepository.findById(id).get().getHaveBed()==true){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
             else{
                 studentRegisterService.assigningRoomToHostel(id);
               return new   ResponseEntity<>(HttpStatus.OK);

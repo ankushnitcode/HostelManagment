@@ -30,7 +30,7 @@ public class StudentDetailsControllerTest {
    // @Order(1)
     public void retrivingStudentFromDB(){//also can create
         Student student = new Student();
-        student.setStudentId(22);
+        student.setStudentId(1);
         student.setStudentGender("Male");
         student.setHaveBed(true);
         student.setStudentName("tom");
@@ -50,8 +50,8 @@ public class StudentDetailsControllerTest {
    // @Order(3)
     public void retriveStudentById(){
         //when(studentRepository.findById(1)).thenReturn(new Student("id"),1);
-        Student student = studentRepository.findById(22).get();
-        assertEquals(22,student.getStudentId());
+        Student student = studentRepository.findById(1).get();
+        assertEquals(1,student.getStudentId());
         //assertEquals(expected-value,actual-value);
 
     }
