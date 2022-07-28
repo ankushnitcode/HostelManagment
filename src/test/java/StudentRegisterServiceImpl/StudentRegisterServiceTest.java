@@ -1,4 +1,4 @@
-package com.example.BedManagement.ControllerTest;
+package StudentRegisterServiceImpl;
 
 import com.example.BedManagement.Controllers.StudentDetailsController;
 import com.example.BedManagement.Controllers.StudentRegistrationAndRequestController;
@@ -13,20 +13,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @WebMvcTest(StudentDetailsController.class)
 //@SpringBootTest
 //@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class StudentTest {
+public class StudentRegisterServiceTest {
     @MockBean
     StudentDetailsController studentDetailController;
     @InjectMocks
@@ -76,10 +71,10 @@ public class StudentTest {
         student.setStudentId(1);
         student.setStudentName("Chintu");
         studentRepo.save(student);
-        System.out.println(student + "########");
-        studentRepo.findById(1).get();
-        studentRegisterService.assigningRoomToHostel(1);
-        System.out.println(hostelRepo.findById(1) + "@@@@@@");
+       // System.out.println(student + "########");
+       // studentRepo.findById(1).get();
+        studentRegisterService.bedRequestOperation(1);
+        //System.out.println(hostelRepo.findById(1) + "@@@@@@");
         assertNotNull(hostelRepo.findById(1));
     }
 
