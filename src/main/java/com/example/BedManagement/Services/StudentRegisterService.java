@@ -14,7 +14,7 @@ public interface StudentRegisterService {
      List<Student> findingAllStudent();
     Student createNewStudent(Student student);
      Student createStudentResponse(Student student);
-     List<BoysRoom> assigningBedToStudent(int id, List<BoysRoom> boysRoomList);
+     List<BoysRoom> assigningBedToBoysStudent(int id, List<BoysRoom> boysRoomList);
 
     List<GirlsRoom> assigningBedToGirlsStudent(int id, List<GirlsRoom> girlsRoomList);
      void assigningRoomToHostel(int id) throws HostelNotFoundException;

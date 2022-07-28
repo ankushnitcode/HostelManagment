@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StudentDetailsControllerTest {
 
-    @Autowired
+    @MockBean
     StudentRepository studentRepository;
 
     @MockBean
