@@ -18,8 +18,6 @@ public class GirlsRoom {
     private int roomId;
     @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-
-    //  @JoinColumn(name = "studentId",referencedColumnName = "roomId")
     private List<Student> studentList;
     @ManyToOne
     private Hostel hostel;

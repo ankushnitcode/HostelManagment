@@ -5,8 +5,7 @@ import com.example.BedManagement.Entity.Hostel;
 import com.example.BedManagement.Entity.BoysRoom;
 import com.example.BedManagement.Entity.Student;
 //import com.example.BedManagement.Model.StudentInfo;
-import com.example.BedManagement.Exception.HostelNotFoundException;
-import com.example.BedManagement.Model.StudentNotFoundException;
+import com.example.BedManagement.Exception.StudentNotFoundException;
 import com.example.BedManagement.Repository.BoysRoomRepository;
 import com.example.BedManagement.Repository.GirlsRoomRepository;
 import com.example.BedManagement.Repository.HostelRepository;
@@ -40,6 +39,7 @@ public class StudentDetailsController {
     // retrieve all students - GET/students
     @GetMapping("/students")
     public List<Student> retrieveAllStudent() {
+
         return studentRegisterService.findingAllStudent();
     }
 
@@ -71,7 +71,6 @@ public class StudentDetailsController {
                 boysRoom.getStudentList().forEach(student ->
                         studentList.add(studentRepository.findById(student.getStudentId()).get()));
             }
-
             return new ResponseEntity<>(studentList, HttpStatus.OK);
 
         } else {
