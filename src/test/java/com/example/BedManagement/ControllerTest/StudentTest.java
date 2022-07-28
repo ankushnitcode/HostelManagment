@@ -78,7 +78,7 @@ public class StudentTest {
         studentRepo.save(student);
         System.out.println(student + "########");
         studentRepo.findById(1).get();
-        studentRegisterService.assigningRoomToHostel(1);
+        studentRegisterService.bedRequestOperation(1);
         System.out.println(hostelRepo.findById(1) + "@@@@@@");
         assertNotNull(hostelRepo.findById(1));
     }

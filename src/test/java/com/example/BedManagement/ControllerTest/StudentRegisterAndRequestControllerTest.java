@@ -58,12 +58,19 @@ public class StudentRegisterAndRequestControllerTest{
        mockMvc.perform(mockRequest).andExpect(status().isCreated());
 
     }
-    @Test
-    public void studentBedRequestTest() throws Exception, HostelNotFoundException {
-       MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
-               .post("/HostelSystem/request/1");
-       mockMvc.perform(mockRequest).andExpect(status().isOk());
-
-
-    }
+//    @Test
+//    public void studentBedRequestTest() throws Exception, HostelNotFoundException {
+//        Student student = Student.builder().studentId(1).studentName("ankush")
+//                .studentGender("male").haveBed(false).build();
+//        String content = ow.writeValueAsString(student);
+//
+//        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
+//                .post("/HostelSystem/request/1").
+//                contentType(MediaType).
+//                accept(MediaType.ALL).content(1);
+//
+//        mockMvc.perform(mockRequest).andExpect(status().isOk());
+//
+//
+//    }
 }
