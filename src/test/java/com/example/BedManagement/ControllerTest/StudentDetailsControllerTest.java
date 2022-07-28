@@ -19,16 +19,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 //@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StudentDetailsControllerTest {
-
     @MockBean
     StudentRepository studentRepository;
-
     @MockBean
     Student student;
 
     @Test
    // @Order(1)
-    public void retrivingStudentFromDB(){//also can create
+    public void retrivingStudentFromDB(){
         Student student = new Student();
         student.setStudentId(1);
         student.setStudentGender("Male");
