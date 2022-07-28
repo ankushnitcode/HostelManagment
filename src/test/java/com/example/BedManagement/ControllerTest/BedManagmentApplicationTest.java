@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -38,11 +36,6 @@ public class BedManagmentApplicationTest{
 
     @Test
     public void createNewStudent(){
-//        Student newStudent = new Student();
-//        newStudent.setStudentName(studentInfo.getName());
-//        newStudent.setStudentGender(studentInfo.getGender());
-//        newStudent.setHaveBed(studentInfo.getHaveBed());
-//        return newStudent;
         Student newStudent = new Student();
         newStudent.setStudentId(1);
         newStudent.setStudentName("Test1");
@@ -57,11 +50,5 @@ public class BedManagmentApplicationTest{
 
     }
 
-//    @Test
-//    public void retriveAll(){//checking data present in database
-//        List<Student> list = studentRepository.findAll();
-//        // assertThat(list).size().isGreaterThan(0);
-//        assertThat(list).size().isGreaterThan(0);
-//    }
 
 }

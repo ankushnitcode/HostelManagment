@@ -42,17 +42,14 @@ public class StudentDetailsControllerTest {
    // @Order(2)
     public void retriveAll(){//checking data present in database
         List<Student> list = studentRepository.findAll();
-        // assertThat(list).size().isGreaterThan(0);
         assertThat(list).size().isGreaterThan(0);
     }
 
     @Test
    // @Order(3)
     public void retriveStudentById(){
-        //when(studentRepository.findById(1)).thenReturn(new Student("id"),1);
         Student student = studentRepository.findById(1).get();
         assertEquals(1,student.getStudentId());
-        //assertEquals(expected-value,actual-value);
 
     }
 

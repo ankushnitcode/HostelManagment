@@ -5,7 +5,7 @@ import com.example.BedManagement.Entity.Hostel;
 import com.example.BedManagement.Entity.BoysRoom;
 import com.example.BedManagement.Entity.Student;
 //import com.example.BedManagement.Model.StudentInfo;
-import com.example.BedManagement.Model.StudentNotFoundException;
+import com.example.BedManagement.Exception.StudentNotFoundException;
 import com.example.BedManagement.Repository.BoysRoomRepository;
 import com.example.BedManagement.Repository.GirlsRoomRepository;
 import com.example.BedManagement.Repository.HostelRepository;

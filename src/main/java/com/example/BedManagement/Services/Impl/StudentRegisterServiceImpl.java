@@ -45,7 +45,7 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
         return studentResponse;
     }
 
-    public List<BoysRoom> assigningBedToStudent(int id, List<BoysRoom> roomList) {
+    public List<BoysRoom> assigningBedToBoyStudent(int id, List<BoysRoom> roomList) {
         Student assigningStudent = studentRepository.findById(id).get();
         List<BoysRoom> returningBoysRoomList = new ArrayList<>();
         if (roomList.size() > 0) {
@@ -116,7 +116,7 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
     }
 
     @Transactional
-    public void assigningRoomToHostel(int id) throws HostelNotFoundException {
+    public void bedRequestOperation(int id) throws HostelNotFoundException {
         Student student = studentRepository.findById(id).get();
         List<Hostel> hostelList = hostelRepository.findAll();
         List<Hostel> boysHostelList = new ArrayList<>();
@@ -132,7 +132,7 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
                 Hostel newHostel = new Hostel();
                 newHostel.setHostelCategory(student.getStudentGender());
                 List<BoysRoom> boysRoomList = new ArrayList<>(20);
-                boysRoomList = assigningBedToStudent(id, boysRoomList);
+                boysRoomList = assigningBedToBoyStudent(id, boysRoomList);
                 newHostel.setBoysRoomList(boysRoomList);
                 List<Hostel> newHostelList = new ArrayList<>();
                 newHostelList.add(newHostel);
@@ -143,7 +143,7 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
                 for (Hostel hostel : boysHostelList) {
                     if (hostel.getBoysRoomList().size() < 20) {
                         List<BoysRoom> boysRoomList = hostel.getBoysRoomList();
-                        boysRoomList = assigningBedToStudent(id, boysRoomList);
+                        boysRoomList = assigningBedToBoyStudent(id, boysRoomList);
                         hostelRepository.save(hostel);
                         return;
                     }
@@ -152,7 +152,7 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
                     Hostel newHostel = new Hostel();
                     newHostel.setHostelCategory(student.getStudentGender());
                     List<BoysRoom> boysRoomList = new ArrayList<>(20);
-                    boysRoomList = assigningBedToStudent(id, boysRoomList);
+                    boysRoomList = assigningBedToBoyStudent(id, boysRoomList);
                     newHostel.setBoysRoomList(boysRoomList);
                     List<Hostel> newHostelList = new ArrayList<>();
                     newHostelList.add(newHostel);

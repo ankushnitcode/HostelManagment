@@ -2,8 +2,6 @@ package com.example.BedManagement.Exception;
 
 import java.util.Date;
 
-import com.example.BedManagement.Entity.Student;
-import com.example.BedManagement.Model.StudentNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

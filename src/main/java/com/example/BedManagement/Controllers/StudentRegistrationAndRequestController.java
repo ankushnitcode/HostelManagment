@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 
 
 @RestController
@@ -46,8 +44,8 @@ public class StudentRegistrationAndRequestController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
             else{
-                studentRegisterService.assigningRoomToHostel(id);
-              return new   ResponseEntity<>(HttpStatus.OK);
+                studentRegisterService.bedRequestOperation(id);
+              return new   ResponseEntity<>(studentRepository.findById(id),HttpStatus.OK);
             }
 
         }
