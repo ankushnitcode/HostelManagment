@@ -1,8 +1,8 @@
 package com.example.BedManagement.ControllerTest;
 
-import com.example.BedManagement.Entity.Student;
-import com.example.BedManagement.Repository.StudentRepository;
-import com.example.BedManagement.Services.Impl.StudentRegisterServiceImpl;
+import com.example.BedManagement.entity.Student;
+import com.example.BedManagement.repository.StudentRepository;
+import com.example.BedManagement.services.Impl.StudentRegisterServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

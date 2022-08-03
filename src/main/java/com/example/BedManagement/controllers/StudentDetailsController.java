@@ -1,16 +1,16 @@
-package com.example.BedManagement.Controllers;
+package com.example.BedManagement.controllers;
 
-import com.example.BedManagement.Entity.GirlsRoom;
-import com.example.BedManagement.Entity.Hostel;
-import com.example.BedManagement.Entity.BoysRoom;
-import com.example.BedManagement.Entity.Student;
+import com.example.BedManagement.entity.GirlsRoom;
+import com.example.BedManagement.entity.Hostel;
+import com.example.BedManagement.entity.BoysRoom;
+import com.example.BedManagement.entity.Student;
 //import com.example.BedManagement.Model.StudentInfo;
-import com.example.BedManagement.Exception.StudentNotFoundException;
-import com.example.BedManagement.Repository.BoysRoomRepository;
-import com.example.BedManagement.Repository.GirlsRoomRepository;
-import com.example.BedManagement.Repository.HostelRepository;
-import com.example.BedManagement.Repository.StudentRepository;
-import com.example.BedManagement.Services.StudentRegisterService;
+import com.example.BedManagement.exception.StudentNotFoundException;
+import com.example.BedManagement.repository.BoysRoomRepository;
+import com.example.BedManagement.repository.GirlsRoomRepository;
+import com.example.BedManagement.repository.HostelRepository;
+import com.example.BedManagement.repository.StudentRepository;
+import com.example.BedManagement.services.StudentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

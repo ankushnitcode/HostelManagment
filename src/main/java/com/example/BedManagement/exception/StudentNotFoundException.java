@@ -1,4 +1,4 @@
-package com.example.BedManagement.Exception;
+package com.example.BedManagement.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

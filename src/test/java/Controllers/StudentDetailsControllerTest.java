@@ -1,10 +1,9 @@
 package Controllers;
 
-import com.example.BedManagement.Entity.Student;
-import com.example.BedManagement.Repository.StudentRepository;
+import com.example.BedManagement.entity.Student;
+import com.example.BedManagement.repository.StudentRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;

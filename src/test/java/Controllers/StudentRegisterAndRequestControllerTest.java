@@ -1,10 +1,10 @@
 package Controllers;
 
-import com.example.BedManagement.Controllers.StudentRegistrationAndRequestController;
-import com.example.BedManagement.Entity.Student;
-import com.example.BedManagement.Exception.HostelNotFoundException;
-import com.example.BedManagement.Repository.StudentRepository;
-import com.example.BedManagement.Services.StudentRegisterService;
+import com.example.BedManagement.controllers.StudentRegistrationAndRequestController;
+import com.example.BedManagement.entity.Student;
+import com.example.BedManagement.exception.HostelNotFoundException;
+import com.example.BedManagement.repository.StudentRepository;
+import com.example.BedManagement.services.StudentRegisterService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.Before;

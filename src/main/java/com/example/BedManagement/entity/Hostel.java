@@ -1,10 +1,9 @@
-package com.example.BedManagement.Entity;
+package com.example.BedManagement.entity;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
