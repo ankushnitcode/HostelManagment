@@ -1,4 +1,4 @@
-package com.example.BedManagement.Entity;
+package com.example.BedManagement.entity;
 
 
 import com.sun.istack.NotNull;

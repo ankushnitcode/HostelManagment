@@ -1,9 +1,9 @@
-package com.example.BedManagement.Services;
+package com.example.BedManagement.services;
 
-import com.example.BedManagement.Entity.BoysRoom;
-import com.example.BedManagement.Entity.GirlsRoom;
-import com.example.BedManagement.Entity.Student;
-import com.example.BedManagement.Exception.HostelNotFoundException;
+import com.example.BedManagement.entity.BoysRoom;
+import com.example.BedManagement.entity.GirlsRoom;
+import com.example.BedManagement.entity.Student;
+import com.example.BedManagement.exception.HostelNotFoundException;
 
 
 import java.util.List;

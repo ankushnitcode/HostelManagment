@@ -1,4 +1,4 @@
-package com.example.BedManagement.Exception;
+package com.example.BedManagement.exception;
 
 public class HostelNotFoundException extends RuntimeException {
     public HostelNotFoundException(String message) {

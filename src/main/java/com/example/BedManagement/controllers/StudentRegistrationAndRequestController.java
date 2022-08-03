@@ -1,10 +1,10 @@
-package com.example.BedManagement.Controllers;
+package com.example.BedManagement.controllers;
 
-import com.example.BedManagement.Entity.Student;
+import com.example.BedManagement.entity.Student;
 //import com.example.BedManagement.Model.StudentInfo;
-import com.example.BedManagement.Exception.HostelNotFoundException;
-import com.example.BedManagement.Repository.StudentRepository;
-import com.example.BedManagement.Services.StudentRegisterService;
+import com.example.BedManagement.exception.HostelNotFoundException;
+import com.example.BedManagement.repository.StudentRepository;
+import com.example.BedManagement.services.StudentRegisterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

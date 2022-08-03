@@ -1,13 +1,13 @@
 package StudentRegisterServiceImpl;
 
-import com.example.BedManagement.Controllers.StudentDetailsController;
-import com.example.BedManagement.Controllers.StudentRegistrationAndRequestController;
-import com.example.BedManagement.Entity.Student;
-import com.example.BedManagement.Repository.BoysRoomRepository;
-import com.example.BedManagement.Repository.GirlsRoomRepository;
-import com.example.BedManagement.Repository.HostelRepository;
-import com.example.BedManagement.Repository.StudentRepository;
-import com.example.BedManagement.Services.Impl.StudentRegisterServiceImpl;
+import com.example.BedManagement.controllers.StudentDetailsController;
+import com.example.BedManagement.controllers.StudentRegistrationAndRequestController;
+import com.example.BedManagement.entity.Student;
+import com.example.BedManagement.repository.BoysRoomRepository;
+import com.example.BedManagement.repository.GirlsRoomRepository;
+import com.example.BedManagement.repository.HostelRepository;
+import com.example.BedManagement.repository.StudentRepository;
+import com.example.BedManagement.services.Impl.StudentRegisterServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;

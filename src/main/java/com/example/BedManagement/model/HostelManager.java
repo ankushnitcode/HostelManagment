@@ -1,6 +1,6 @@
-package com.example.BedManagement.Model;
+package com.example.BedManagement.model;
 
-import com.example.BedManagement.Entity.Hostel;
+import com.example.BedManagement.entity.Hostel;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
