@@ -1,6 +1,7 @@
 package com.example.BedManagement.entity;
 
 //import com.example.BedManagement.Model.StudentInfo;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoysRoom {
+    @ApiModelProperty(value = "BoysRoomId")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int roomId;
