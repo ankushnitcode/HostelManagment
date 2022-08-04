@@ -1,4 +1,4 @@
-package StudentRegisterServiceImpl;
+package services;
 
 import com.example.BedManagement.controllers.StudentDetailsController;
 import com.example.BedManagement.controllers.StudentRegistrationAndRequestController;
@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,13 +24,16 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(StudentDetailsController.class)
-//@SpringBootTest
+@SpringBootTest
 //@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StudentRegisterServiceTest {
     @MockBean
@@ -126,6 +130,26 @@ public class StudentRegisterServiceTest {
 //        System.out.println(student + "@@@@@@@@@@@@@");
 //        System.out.println(result.getResponse().getContentAsString() + "#############");
 //        assertEquals(student,actual);
+//    }
+    @Test
+    public void findAllStudentTest(){
+        when(studentRepo.findAll()).thenReturn(Stream.of
+                        (new Student("Test1","Male",null),
+                                new Student("Test2","Female",null))
+                .collect(Collectors.toList()));
+        assertThat(studentRepo).isNotNull();
+        //assertEquals(2,service.getStudent().size());
+    }
+
+//    @Test
+//    public void createNewStudent(){
+//        Student newStudent = new Student();
+//        newStudent.setStudentId(1);
+//        newStudent.setStudentName("Test1");
+//        newStudent.setStudentGender("Male");
+//        newStudent.setHaveBed(null);
+//        // newStudent.setRoom(null);
+//        assertEquals(new Student("Test1","Male",null),newStudent);
 //    }
 
     private String mapToJson(Object object) throws JsonProcessingException {

@@ -1,4 +1,4 @@
-package Controllers;
+package controllers;
 
 import com.example.BedManagement.controllers.StudentRegistrationAndRequestController;
 import com.example.BedManagement.entity.Student;
