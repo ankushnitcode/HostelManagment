@@ -1,4 +1,5 @@
 package com.example.BedManagement.controllers;
+
 import com.example.BedManagement.entity.GirlsRoom;
 import com.example.BedManagement.entity.Hostel;
 import com.example.BedManagement.entity.BoysRoom;
@@ -48,7 +49,7 @@ public class StudentDetailsController {
     @ApiImplicitParam(name = "StudentId", value = "The request object that will used to retrieve a particular student from student table.")
     @ApiOperation(value = " To retrieve particular student", tags = {"Hostel Management System APIs"}, httpMethod = "GET")
     @GetMapping("/students/{id}")
-    public ResponseEntity<Student> retrieveStudent(@PathVariable int id) {
+    public ResponseEntity<Student> retrieveStudentById(@PathVariable int id) {
 
         if (studentRepository.existsById(id)) {
             Student student = studentRepository.findById(id).get();

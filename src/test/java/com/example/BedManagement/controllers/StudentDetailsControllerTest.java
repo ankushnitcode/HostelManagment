@@ -2,9 +2,9 @@ package com.example.BedManagement.controllers;
 
 import com.example.BedManagement.entity.Student;
 import com.example.BedManagement.repository.StudentRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,28 +26,38 @@ public class StudentDetailsControllerTest {
     @MockBean
     Student student;
 
-    @Test
-   // @Order(1)
-    public void retrivingStudentFromDB(){
-        Student student = new Student();
+    @Before
+    public void init() {
+        Student newStudent = new Student();
         student.setStudentId(1);
         student.setStudentGender("Male");
         student.setHaveBed(true);
         student.setStudentName("tom");
         studentRepository.save(student);
+    }
+
+    @Test
+   // @Order(1)
+    public void retrieveAllStudent_retrivingStudentFromDB_returnAllStudent(){
+//        Student student = new Student();
+//        student.setStudentId(1);
+//        student.setStudentGender("Male");
+//        student.setHaveBed(true);
+//        student.setStudentName("tom");
+//        studentRepository.save(student);
         when(studentRepository.findById(1)).thenReturn(Optional.of(student));
         assertNotNull(studentRepository.findById(1).get());
     }
 
     @Test
    // @Order(2)
-    public void retriveAll(){//checking data present in database
-        Student student = new Student();
-        student.setStudentId(1);
-        student.setStudentGender("Male");
-        student.setHaveBed(true);
-        student.setStudentName("tom");
-        studentRepository.save(student);
+    public void retriveAllStudent_CheckingIfDBEmpty_DBNotNUll(){//checking data present in database
+//        Student student = new Student();
+//        student.setStudentId(1);
+//        student.setStudentGender("Male");
+//        student.setHaveBed(true);
+//        student.setStudentName("tom");
+//        studentRepository.save(student);
         List<Student> list = studentRepository.findAll();
         when(studentRepository.findAll()).thenReturn(list);
         assertThat(list).size().isGreaterThan(0);
@@ -55,7 +65,7 @@ public class StudentDetailsControllerTest {
 
     @Test
    // @Order(3)
-    public void retriveStudentById(){
+    public void retrieveStudentById_RetriveStudentById_ReturnForGivenId(){
         Student student = studentRepository.findById(1).get();
         assertEquals(1,student.getStudentId());
 
@@ -64,10 +74,13 @@ public class StudentDetailsControllerTest {
     @Test
    // @Order(4)
     public void updateStudent(){
-        Student student = studentRepository.findById(22).get();
+
+        Student student = studentRepository.findById(2).get();
         student.setStudentName("Test1");
         studentRepository.save(student);
-        assertNotEquals("Test",studentRepository.findById(22).get().getStudentName());
+        when(studentRepository.findById(2)).thenReturn(Optional.of(student));
+        System.out.println(student + "@@@@");
+        assertNotEquals("Test",studentRepository.findById(2).get().getStudentName());
     }
 
     @Test
