@@ -1,5 +1,3 @@
-package com.example.BedManagement.ControllerTest;
-
 import com.example.BedManagement.entity.Student;
 import com.example.BedManagement.repository.StudentRepository;
 import com.example.BedManagement.services.Impl.StudentRegisterServiceImpl;
