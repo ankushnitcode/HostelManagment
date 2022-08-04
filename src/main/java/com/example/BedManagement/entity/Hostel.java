@@ -30,7 +30,8 @@ public class Hostel {
     @LazyCollection(LazyCollectionOption.FALSE)
    private List<GirlsRoom> girlsRoomList;
 
-    public Hostel(int hostelNumber) {
+    public Hostel(int hostelNumber, String male) {
+
         this.hostelNumber = hostelNumber;
     }
 }
