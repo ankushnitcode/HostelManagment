@@ -23,12 +23,12 @@ public class Hostel {
     @ApiModelProperty(value = "HostelCategory")
     private String hostelCategory;
 
-
+    @ApiModelProperty(value = "boysRoomList")
    @OneToMany(cascade = CascadeType.ALL)
    @LazyCollection(LazyCollectionOption.FALSE)
    private List<BoysRoom> boysRoomList;
 
-
+    @ApiModelProperty(value = "GirlsRoomList")
     @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
    private List<GirlsRoom> girlsRoomList;

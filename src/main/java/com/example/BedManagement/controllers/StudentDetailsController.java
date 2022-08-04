@@ -1,10 +1,8 @@
 package com.example.BedManagement.controllers;
-
 import com.example.BedManagement.entity.GirlsRoom;
 import com.example.BedManagement.entity.Hostel;
 import com.example.BedManagement.entity.BoysRoom;
 import com.example.BedManagement.entity.Student;
-//import com.example.BedManagement.Model.StudentInfo;
 import com.example.BedManagement.exception.StudentNotFoundException;
 import com.example.BedManagement.repository.BoysRoomRepository;
 import com.example.BedManagement.repository.GirlsRoomRepository;
@@ -37,8 +35,6 @@ public class StudentDetailsController {
     private StudentRepository studentRepository;
     @Autowired
     private HostelRepository hostelRepository;
-
-    // retrieve all students - GET/students
 
     @ApiOperation(value = " To retrieve all the students", tags = {"Hostel Management System APIs"}, httpMethod = "GET")
     @GetMapping("/students")

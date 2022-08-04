@@ -18,9 +18,11 @@ public class GirlsRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int roomId;
+    @ApiModelProperty(value = "studentList")
     @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student> studentList;
+    @ApiModelProperty(value = "Hostel")
     @ManyToOne
     private Hostel hostel;
 
