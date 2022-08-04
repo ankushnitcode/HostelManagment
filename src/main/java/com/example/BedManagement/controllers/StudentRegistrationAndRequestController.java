@@ -6,6 +6,7 @@ import com.example.BedManagement.exception.HostelNotFoundException;
 import com.example.BedManagement.repository.StudentRepository;
 import com.example.BedManagement.services.StudentRegisterService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/HostelSystem")
+@Api(tags = "Hostel Management System Registration APIs")
 public class StudentRegistrationAndRequestController {
     @Autowired
     StudentRepository studentRepository;

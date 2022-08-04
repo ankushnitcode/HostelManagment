@@ -1,5 +1,6 @@
 package com.example.BedManagement.entity;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ApiModel(description = "GirlsRoom Table")
 public class GirlsRoom {
     @ApiModelProperty(value = "GirlsRoomId")
     @Id

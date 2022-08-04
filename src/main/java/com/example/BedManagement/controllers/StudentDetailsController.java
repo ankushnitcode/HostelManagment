@@ -9,6 +9,7 @@ import com.example.BedManagement.repository.GirlsRoomRepository;
 import com.example.BedManagement.repository.HostelRepository;
 import com.example.BedManagement.repository.StudentRepository;
 import com.example.BedManagement.services.StudentRegisterService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("HostelSystem")
-
+@Api(tags = "Hostel Management System APIs")
 public class StudentDetailsController {
 
     @Autowired
