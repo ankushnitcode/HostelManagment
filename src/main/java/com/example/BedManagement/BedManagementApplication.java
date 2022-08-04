@@ -12,18 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @SpringBootApplication
-
-
-
 @ComponentScan
 
 @EnableTransactionManagement
 public class BedManagementApplication {
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(BedManagementApplication.class, args);
 	}
+
 
 	@GetMapping("/springboot")
 	@ResponseBody
