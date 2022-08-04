@@ -6,6 +6,8 @@ import com.example.BedManagement.exception.HostelNotFoundException;
 import com.example.BedManagement.repository.StudentRepository;
 import com.example.BedManagement.services.StudentRegisterService;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,8 @@ public class StudentRegistrationAndRequestController {
   String homePage(){
         return "Welcome";
     }
+    @ApiImplicitParam(name = "student", value = "The request object that will used to create a student and register into our database.", dataTypeClass = Student.class)
+    @ApiOperation(value = " To register new student", tags = {"Hostel Management System APIs"}, httpMethod = "POST")
     @PostMapping("/students")
     @ResponseBody
     public ResponseEntity<Object> createStudent(@Valid @RequestBody Student student) {
@@ -35,7 +39,8 @@ public class StudentRegistrationAndRequestController {
         return new ResponseEntity<>(savedStudent,HttpStatus.CREATED);
     }
 
-
+    @ApiImplicitParam(name = "studentId", value = "The request object is student id  that will used by student to request a bed ")
+    @ApiOperation(value = " To giving bed to student", tags = {"Hostel Management System APIs"}, httpMethod = "POST")
     @PostMapping("/request/{id}")
     public ResponseEntity<Object> studentBedRequest(@PathVariable int id ) throws HostelNotFoundException {
         if(!studentRepository.existsById(id)){
