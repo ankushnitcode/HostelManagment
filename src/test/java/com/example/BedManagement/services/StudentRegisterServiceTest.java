@@ -1,4 +1,4 @@
-package services;
+package com.example.BedManagement.services;
 
 import com.example.BedManagement.controllers.StudentDetailsController;
 import com.example.BedManagement.controllers.StudentRegistrationAndRequestController;

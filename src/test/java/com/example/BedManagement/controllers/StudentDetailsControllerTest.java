@@ -1,17 +1,20 @@
-package controllers;
+package com.example.BedManagement.controllers;
 
 import com.example.BedManagement.entity.Student;
 import com.example.BedManagement.repository.StudentRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 //@WebMvcTest(StudentDetailsController.class)
@@ -32,13 +35,21 @@ public class StudentDetailsControllerTest {
         student.setHaveBed(true);
         student.setStudentName("tom");
         studentRepository.save(student);
+        when(studentRepository.findById(1)).thenReturn(Optional.of(student));
         assertNotNull(studentRepository.findById(1).get());
     }
 
     @Test
    // @Order(2)
     public void retriveAll(){//checking data present in database
+        Student student = new Student();
+        student.setStudentId(1);
+        student.setStudentGender("Male");
+        student.setHaveBed(true);
+        student.setStudentName("tom");
+        studentRepository.save(student);
         List<Student> list = studentRepository.findAll();
+        when(studentRepository.findAll()).thenReturn(list);
         assertThat(list).size().isGreaterThan(0);
     }
 
