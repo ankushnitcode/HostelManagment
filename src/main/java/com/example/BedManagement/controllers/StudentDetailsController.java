@@ -24,7 +24,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("HostelSystem")
-@Api(tags = "Hostel Management System APIs")
+@Api(tags = "Hostel System APIs")
 public class StudentDetailsController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class StudentDetailsController {
     @Autowired
     private HostelRepository hostelRepository;
 
-    @ApiOperation(value = " To retrieve all the students", tags = {"Hostel Management System APIs"}, httpMethod = "GET")
+    @ApiOperation(value = " To retrieve all the students", tags = {"Hostel System APIs"}, httpMethod = "GET")
     @GetMapping("/students")
     public List<Student> retrieveAllStudent() {
 
@@ -47,7 +47,7 @@ public class StudentDetailsController {
 
 
     @ApiImplicitParam(name = "StudentId", value = "The request object that will used to retrieve a particular student from student table.")
-    @ApiOperation(value = " To retrieve particular student", tags = {"Hostel Management System APIs"}, httpMethod = "GET")
+    @ApiOperation(value = " To retrieve particular student", tags = {"Hostel System APIs"}, httpMethod = "GET")
     @GetMapping("/students/{id}")
     public ResponseEntity<Student> retrieveStudentById(@PathVariable int id) {
 
@@ -60,7 +60,7 @@ public class StudentDetailsController {
 
     }
     @ApiImplicitParam(name = "Hostel_No", value = "The request object that will used to find all the students in that hostel.")
-    @ApiOperation(value = " To retrieve all the student from hostel", tags = {"Hostel Management System APIs"}, httpMethod = "GET")
+    @ApiOperation(value = " To retrieve all the student from hostel", tags = {"Hostel System APIs"}, httpMethod = "GET")
     @GetMapping("/{hostelNo}")
     public ResponseEntity<List<Student>> retrieveStudentsByHostel(@PathVariable int hostelNo) {
         if (!hostelRepository.existsById(hostelNo)) {
@@ -90,7 +90,7 @@ public class StudentDetailsController {
         }
     }
     @ApiImplicitParam(name = "hostelNo , room_id", value = "The request object that will used to retrieve the students from room.")
-    @ApiOperation(value = " To retrieve all the student from room ", tags = {"Hostel Management System APIs"}, httpMethod = "GET")
+    @ApiOperation(value = " To retrieve all the student from room ", tags = {"Hostel System APIs"}, httpMethod = "GET")
     @GetMapping("/{hostelNo}/{roomId}")
     public ResponseEntity<List<Student>> retrieveStudentByRoom
             (@PathVariable(name = "hostelNo") int hostelNo, @PathVariable(name = "roomId") int roomId) {
