@@ -24,7 +24,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("HostelSystem")
-@Api(tags = "Hostel Management System APIs")
+@Api(tags = "Hostel System APIs")
 public class StudentDetailsController {
 
     @Autowired
