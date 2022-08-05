@@ -29,7 +29,7 @@ public class StudentRegistrationAndRequestController {
         return "Welcome";
     }
     @ApiImplicitParam(name = "student", value = "The request object that will used to create a student and register into our database.", dataTypeClass = Student.class)
-    @ApiOperation(value = " To register new student", tags = {"Hostel Management System APIs"}, httpMethod = "POST")
+    @ApiOperation(value = " To register new student", tags = {"Hostel System APIs"}, httpMethod = "POST")
     @PostMapping("/students")
     @ResponseBody
     public ResponseEntity<Object> createStudent(@Valid @RequestBody Student student) {
@@ -40,7 +40,7 @@ public class StudentRegistrationAndRequestController {
     }
 
     @ApiImplicitParam(name = "studentId", value = "The request object is student id  that will used by student to request a bed ")
-    @ApiOperation(value = " To giving bed to student", tags = {"Hostel Management System APIs"}, httpMethod = "POST")
+    @ApiOperation(value = " To giving bed to student", tags = {"Hostel System APIs"}, httpMethod = "POST")
     @PostMapping("/request/{id}")
     public ResponseEntity<Object> studentBedRequest(@PathVariable int id ) throws HostelNotFoundException {
         if(!studentRepository.existsById(id)){
