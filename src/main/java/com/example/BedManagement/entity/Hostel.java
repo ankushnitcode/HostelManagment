@@ -1,6 +1,7 @@
 package com.example.BedManagement.entity;
 
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +11,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
-
+@ApiModel(description = "")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,7 +34,8 @@ public class Hostel {
     @LazyCollection(LazyCollectionOption.FALSE)
    private List<GirlsRoom> girlsRoomList;
 
-    public Hostel(int hostelNumber) {
+    public Hostel(int hostelNumber, String male) {
+
         this.hostelNumber = hostelNumber;
     }
 }

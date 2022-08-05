@@ -1,4 +1,5 @@
 package com.example.BedManagement.controllers;
+
 import com.example.BedManagement.entity.GirlsRoom;
 import com.example.BedManagement.entity.Hostel;
 import com.example.BedManagement.entity.BoysRoom;
@@ -9,6 +10,7 @@ import com.example.BedManagement.repository.GirlsRoomRepository;
 import com.example.BedManagement.repository.HostelRepository;
 import com.example.BedManagement.repository.StudentRepository;
 import com.example.BedManagement.services.StudentRegisterService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("HostelSystem")
-
+@Api(tags = "Hostel Management System APIs")
 public class StudentDetailsController {
 
     @Autowired
@@ -47,7 +49,7 @@ public class StudentDetailsController {
     @ApiImplicitParam(name = "StudentId", value = "The request object that will used to retrieve a particular student from student table.")
     @ApiOperation(value = " To retrieve particular student", tags = {"Hostel System APIs"}, httpMethod = "GET")
     @GetMapping("/students/{id}")
-    public ResponseEntity<Student> retrieveStudent(@PathVariable int id) {
+    public ResponseEntity<Student> retrieveStudentById(@PathVariable int id) {
 
         if (studentRepository.existsById(id)) {
             Student student = studentRepository.findById(id).get();
