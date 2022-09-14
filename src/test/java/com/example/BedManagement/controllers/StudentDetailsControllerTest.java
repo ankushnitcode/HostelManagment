@@ -11,8 +11,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
 
 @RunWith(SpringRunner.class)
 //@WebMvcTest(StudentDetailsController.class)
@@ -111,6 +111,7 @@ public class StudentDetailsControllerTest {
         student.setStudentId(1);
         studentRepository.save(student);
         studentRepository.findById(1);
+        when(student.getStudentId()).thenReturn(1);
         assertEquals(1,student.getStudentId());
     }
 
@@ -121,7 +122,7 @@ public class StudentDetailsControllerTest {
         student.setStudentId(1);
         studentRepository.save(student);
         studentRegisterService.bedRequestOperation(1);
-        mockMvc.perform(get("http://localhost:8080/HostelSystem/1")
+        mockMvc.perform(get("http://localhost:8080/HostelSystem/{hostelNumber}",1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
